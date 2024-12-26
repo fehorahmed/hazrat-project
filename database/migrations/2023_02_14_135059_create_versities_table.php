@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('trainee_ages', function (Blueprint $table) {
+        Schema::create('versities', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('max_age');
-            $table->unsignedInteger('min_age');
+            $table->string('name')->unique();
+            $table->boolean('status')->default(1);
+            $table->foreignId('created_by');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trainee_ages');
+        Schema::dropIfExists('versities');
     }
 };

@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\CourseDurationController;
 use App\Http\Controllers\Admin\ApplicationDateController;
 use App\Http\Controllers\Frontend\TraineeNewPasswordController;
 use App\Http\Controllers\Frontend\TraineePasswordResetLinkController;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Fortify\Http\Controllers\NewPasswordController;
 use Laravel\Fortify\Http\Controllers\PasswordResetLinkController;
 
@@ -27,6 +28,7 @@ use Laravel\Fortify\Http\Controllers\PasswordResetLinkController;
 */
 
 Route::get('/', function () {
+    // dd(Hash::make('password'));
     return view('frontend.landing');
 })->name('home');
 

@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 m-auto">
+            <div class="col-md-12 m-auto">
                 <div class="card">
                     <div class="card-header bg-secondary">
                         <h4 class="text-white">Course Create</h4>
@@ -30,7 +30,7 @@
                             @csrf
 
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="row mb-3">
                                         <label for="name" class="col-12 col-md-3 col-form-label">Course Name</label>
                                         <div class="col-12 col-md-9">
@@ -41,6 +41,7 @@
                                             @enderror
                                         </div>
                                     </div>
+
                                     <div class="row mb-3">
                                         <label for="start_date" class="col-12 col-md-3 col-form-label">Start Date</label>
                                         <div class="col-12 col-md-5">
@@ -63,6 +64,20 @@
                                             @enderror
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row mb-3">
+                                        <label for="course_code" class="col-12 col-md-3 col-form-label">Course Name</label>
+                                        <div class="col-12 col-md-9">
+                                            <input type="text" name="course_code" id="course_code"
+                                                value="{{ old('course_code') }}" class="form-control"
+                                                placeholder="Enter course code here">
+                                            @error('course_code')
+                                                <div class="help-block text-danger">{{ $message }} </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
 
                                     <div class="row mb-3">
                                         <label for="example-select" class="col-12 col-md-3 col-form-label">Status</label>
@@ -76,6 +91,20 @@
                                             @enderror
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="row mb-3">
+                                        <label for="name" class="form-label">Content Here</label>
+                                        <div class="col-12 col-md-12">
+                                            <input type="text" name="text" id="text" value="{{ old('text') }}"
+                                                class="form-control" placeholder="Enter text here">
+                                            @error('text')
+                                                <div class="help-block text-danger">{{ $message }} </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
                                     <div class="text-center mb-3">
                                         <a href="{{ route('admin.config.course.index') }}" class="btn btn-danger">Back</a>
                                         <input type="submit" class="btn btn-primary  " value="Submit Application">

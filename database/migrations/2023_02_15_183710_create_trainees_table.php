@@ -13,11 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('quotas', function (Blueprint $table) {
+        Schema::create('trainees', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
+            $table->string('father_name');
+            $table->string('mother_name');
+            $table->string('trainee_code')->unique();
+            $table->string('email')->unique();
+            $table->string('phone')->unique()->nullable();
+            $table->string('nid')->nullable();
+            $table->string('password');
             $table->boolean('status')->default(1);
-            $table->foreignId('created_by');
             $table->timestamps();
         });
     }
@@ -29,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quotas');
+        Schema::dropIfExists('trainees');
     }
 };

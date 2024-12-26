@@ -16,7 +16,11 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->string('course_code')->unique();
+            $table->string('slug')->unique();
+            $table->longText('text')->nullable();
             $table->boolean('status')->default(1);
             $table->foreignId('created_by');
             $table->timestamps();
