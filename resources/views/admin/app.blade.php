@@ -64,8 +64,7 @@
     </style>
     @stack('styles')
 
-    <title>@yield('title') - Sheikh Hasina National Institute of Youth Development ( শেখ হাসিনা জাতীয় যুব উন্নয়ন
-        ইনস্টিটিউট )</title>
+    <title>@yield('title') - Institute of Youth Development</title>
 
 </head>
 
@@ -96,9 +95,16 @@
     <div class="rightbar-overlay"></div>
     <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
     <script src="{{ asset('assets/js/app.min.js') }}"></script>
-    <script src="{{ asset('assets/js/summernote-bs5.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/summernote-bs5.min.js') }}"></script> --}}
     <script src="{{ asset('assets/js/sweetalert2.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    {{-- <script src="https://cdn.tiny.cloud/1/tfcf4qwelyiy3nay2mmc2iaw56t3ianbxd3j31d47qeg12o5/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-jquery@1/dist/tinymce-jquery.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/tfcf4qwelyiy3nay2mmc2iaw56t3ianbxd3j31d47qeg12o5/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script> --}}
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
 
     <script>
         $('#summernote').summernote({
@@ -107,6 +113,7 @@
             height: 100
         });
     </script>
+
     {{-- <script>$.NotificationApp.send("Title","Your awesome message text","Right","Background color","Icon")</script> --}}
     <script>
         @if (session()->has('success'))

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class CourseController extends Controller
 {
@@ -41,24 +42,27 @@ class CourseController extends Controller
     {
         $request->validate([
             'name' => 'required|string|unique:courses,name',
+            'course_code' => 'required|string|unique:courses,course_code',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
+            'text' => 'nullable|string|max:50000',
             'status' => 'required|numeric',
         ]);
 
-        $ck_code = Course::orderBy('id', 'desc')->first();
+        // $ck_code = Course::orderBy('id', 'desc')->first();
         // dd($ck_code);
-        if ($ck_code) {
-            $code = 5000 + $ck_code->id + 1;
-            $code = 'C-' . $code;
-        } else {
-            $code = 'C-' . 5001;
-        }
+        // if ($ck_code) {
+        //     $code = 5000 + $ck_code->id + 1;
+        //     $code = 'C-' . $code;
+        // } else {
+        //     $code = 'C-' . 5001;
+        // }
         // dd($code);
-
         $data = new Course();
         $data->name = $request->name;
-        $data->course_code = $code;
+        $data->slug = Str::slug($request->name, '-');
+        $data->course_code = $request->course_code;
+        $data->text = $request->text;
         $data->status = $request->status;
         $data->start_date = $request->start_date;
         $data->end_date = $request->end_date;

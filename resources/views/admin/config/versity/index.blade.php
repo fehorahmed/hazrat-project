@@ -1,6 +1,6 @@
 @extends('admin.app')
 @section('title')
-    {{ isset($pageTitle) ? $pageTitle : 'Education' }}
+    {{ isset($pageTitle) ? $pageTitle : 'Versity' }}
 @endsection
 
 @push('styles')
@@ -16,11 +16,11 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <div class="d-flex">
-                            <a href="{{ route('admin.config.education.create') }}" class="btn btn-primary">Create
-                                Education</a>
+                            <a href="{{ route('admin.config.versity.create') }}" class="btn btn-primary">Create
+                                Versity</a>
                         </div>
                     </div>
-                    <h4 class="page-title">Education List</h4>
+                    <h4 class="page-title">Versity List</h4>
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-6">
-                                <h4>Education</h4>
+                                <h4>Versity</h4>
                             </div>
                             <div class="col-4"></div>
                             <div class="col-2 content-end">
@@ -45,7 +45,7 @@
                             <thead>
                                 <tr>
                                     <th>SL</th>
-                                    <th>Education Name</th>
+                                    <th>Versity Name</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -63,7 +63,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.config.education.edit', $data->id) }}"
+                                            <a href="{{ route('admin.config.versity.edit', $data->id) }}"
                                                 class="btn btn-warning btn-sm">Edit</a>
 
                                         </td>

@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\CourseDurationController;
 use App\Http\Controllers\Admin\ApplicationDateController;
 use App\Http\Controllers\Frontend\TraineeNewPasswordController;
 use App\Http\Controllers\Frontend\TraineePasswordResetLinkController;
+use App\Http\Controllers\VersityController;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Fortify\Http\Controllers\NewPasswordController;
 use Laravel\Fortify\Http\Controllers\PasswordResetLinkController;
@@ -137,13 +138,13 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => 'admin'], function () {
             Route::post('/edit/{id}', [CourseController::class, 'update'])->name('admin.config.course.update');
             Route::get('/export', [CourseController::class, 'export'])->name('admin.config.course.export');
         });
-        Route::group(['prefix' => 'education'], function () {
-            Route::get('/', [EducationController::class, 'index'])->name('admin.config.education.index');
-            Route::get('/create', [EducationController::class, 'create'])->name('admin.config.education.create');
-            Route::post('/create', [EducationController::class, 'store'])->name('admin.config.education.store');
-            Route::get('/edit/{id}', [EducationController::class, 'edit'])->name('admin.config.education.edit');
-            Route::post('/edit/{id}', [EducationController::class, 'update'])->name('admin.config.education.update');
-            Route::get('/export', [EducationController::class, 'export'])->name('admin.config.educations.export');
+        Route::group(['prefix' => 'versity'], function () {
+            Route::get('/', [VersityController::class, 'index'])->name('admin.config.versity.index');
+            Route::get('/create', [VersityController::class, 'create'])->name('admin.config.versity.create');
+            Route::post('/create', [VersityController::class, 'store'])->name('admin.config.versity.store');
+            Route::get('/edit/{id}', [VersityController::class, 'edit'])->name('admin.config.versity.edit');
+            Route::post('/edit/{id}', [VersityController::class, 'update'])->name('admin.config.versity.update');
+            Route::get('/export', [VersityController::class, 'export'])->name('admin.config.versity.export');
         });
         Route::group(['prefix' => 'quota'], function () {
             Route::get('/', [QuotasController::class, 'index'])->name('admin.config.quota.index');

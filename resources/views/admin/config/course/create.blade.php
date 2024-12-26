@@ -1,7 +1,10 @@
 @extends('admin.app')
+
 @section('title')
     {{ isset($pageTitle) ? $pageTitle : 'Course Create' }}
 @endsection
+@push('styles')
+@endpush
 @section('content')
     @include('admin.master.flash')
     <div class="container-fluid">
@@ -67,7 +70,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="row mb-3">
-                                        <label for="course_code" class="col-12 col-md-3 col-form-label">Course Name</label>
+                                        <label for="course_code" class="col-12 col-md-3 col-form-label">Course Code</label>
                                         <div class="col-12 col-md-9">
                                             <input type="text" name="course_code" id="course_code"
                                                 value="{{ old('course_code') }}" class="form-control"
@@ -82,10 +85,10 @@
                                     <div class="row mb-3">
                                         <label for="example-select" class="col-12 col-md-3 col-form-label">Status</label>
                                         <div class="col-12 col-md-9">
-                                            <input type="radio" name="status" id=""
-                                                {{ old('status') == '1' ? 'checked' : '' }} value="1"> Active
-                                            <input type="radio" name="status" id=""
-                                                {{ old('status') == '0' ? 'checked' : '' }} value="0"> Inactive
+                                            <input type="radio" name="status" id="status1"
+                                                {{ old('status') == '1' ? 'checked' : '' }} value="1"> <label for="status1">Active</label>
+                                            <input type="radio" name="status" id="status2"
+                                                {{ old('status') == '0' ? 'checked' : '' }} value="0"> <label for="status2">Inactive</label>
                                             @error('status')
                                                 <div class="help-block text-danger">{{ $message }} </div>
                                             @enderror
@@ -96,8 +99,9 @@
                                     <div class="row mb-3">
                                         <label for="name" class="form-label">Content Here</label>
                                         <div class="col-12 col-md-12">
-                                            <input type="text" name="text" id="text" value="{{ old('text') }}"
-                                                class="form-control" placeholder="Enter text here">
+                                            {{-- <input type="text" name="text" id="text" value="{{ old('text') }}"
+                                                class="form-control" placeholder="Enter text here"> --}}
+                                            <textarea name="text" id="summernote" cols="30" rows="10" class="">{{ old('text') }}</textarea>
                                             @error('text')
                                                 <div class="help-block text-danger">{{ $message }} </div>
                                             @enderror
@@ -118,3 +122,36 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        // tinymce.init({
+        //     selector: 'textarea',
+        //     plugins: [
+        //         // Core editing features
+        //         'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media',
+        //         'searchreplace', 'table', 'visualblocks', 'wordcount',
+        //         // Your account includes a free trial of TinyMCE premium features
+        //         // Try the most popular premium features until Jan 10, 2025:
+        //         'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker',
+        //         'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage',
+        //         'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags',
+        //         'autocorrect', 'typography', 'inlinecss', 'markdown', 'importword', 'exportword', 'exportpdf'
+        //     ],
+        //     toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+        //     tinycomments_mode: 'embedded',
+        //     tinycomments_author: 'Author name',
+        //     mergetags_list: [{
+        //             value: 'First.Name',
+        //             title: 'First Name'
+        //         },
+        //         {
+        //             value: 'Email',
+        //             title: 'Email'
+        //         },
+        //     ],
+        //     ai_request: (request, respondWith) => respondWith.string(() => Promise.reject(
+        //         'See docs to implement AI Assistant')),
+        // });
+    </script>
+@endpush
