@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Trainee;
 use App\Models\TraineeAge;
 use App\Models\User;
+use App\Models\Versity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -31,7 +32,9 @@ class TraineeController extends Controller
             $loginType => $request->input('email'), // Use $loginType as the key
             'password' => $request->input('password'),
         ];
+
         if (Auth::guard('trainee')->attempt($credentials)) {
+            // dd($request->all());
             return redirect()->route('trainee.application.index');
         }
         return redirect()->back()->with('error', 'Something went wrong.');
@@ -40,11 +43,15 @@ class TraineeController extends Controller
     public function register()
     {
 
-        return view('frontend.register');
+        $versities = Versity::where('status',1)->get();
+        // $departments = ::where('status',1)->get();
+
+        return view('frontend.register',compact('versities'));
     }
 
     public function registerPost(Request $request)
     {
+        dd($request->all());
         $request->validate([
             'name' => 'required|string',
             'phone' => 'required|numeric|unique:trainees,phone',

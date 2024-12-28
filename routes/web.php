@@ -10,6 +10,7 @@ use App\Http\Controllers\Frontend\TraineeController;
 use App\Http\Controllers\Admin\InstituteTypeController;
 use App\Http\Controllers\Admin\CourseDurationController;
 use App\Http\Controllers\Admin\ApplicationDateController;
+use App\Http\Controllers\DevelopmentCourseController;
 use App\Http\Controllers\Frontend\TraineeNewPasswordController;
 use App\Http\Controllers\Frontend\TraineePasswordResetLinkController;
 use App\Http\Controllers\VersityController;
@@ -30,6 +31,8 @@ use Laravel\Fortify\Http\Controllers\PasswordResetLinkController;
 
 Route::get('/', function () {
     // dd(Hash::make('password'));
+
+    // return view('frontend_2.app');
     return view('frontend.landing');
 })->name('home');
 
@@ -137,6 +140,14 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => 'admin'], function () {
             Route::get('/edit/{id}', [CourseController::class, 'edit'])->name('admin.config.course.edit');
             Route::post('/edit/{id}', [CourseController::class, 'update'])->name('admin.config.course.update');
             Route::get('/export', [CourseController::class, 'export'])->name('admin.config.course.export');
+        });
+        Route::group(['prefix' => 'development-course'], function () {
+            Route::get('/', [DevelopmentCourseController::class, 'index'])->name('admin.config.development-course.index');
+            Route::get('/create', [DevelopmentCourseController::class, 'create'])->name('admin.config.development-course.create');
+            Route::post('/create', [DevelopmentCourseController::class, 'store'])->name('admin.config.development-course.store');
+            Route::get('/edit/{id}', [DevelopmentCourseController::class, 'edit'])->name('admin.config.development-course.edit');
+            Route::post('/edit/{id}', [DevelopmentCourseController::class, 'update'])->name('admin.config.development-course.update');
+            Route::get('/export', [DevelopmentCourseController::class, 'export'])->name('admin.config.development-course.export');
         });
         Route::group(['prefix' => 'versity'], function () {
             Route::get('/', [VersityController::class, 'index'])->name('admin.config.versity.index');

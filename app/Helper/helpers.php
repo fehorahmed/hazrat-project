@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Course;
+use App\Models\DevelopmentCourse;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
@@ -52,4 +54,16 @@ function deleteFile($path)
 function getFile($file)
 {
     return asset($file);
+}
+function getMenuCourses()
+{
+    $data= Course::select('name','slug')->where('status',1)->orderBy('serial')->get();
+    // dd($data);
+    return  $data;
+}
+function getMenuSkillDevelopments()
+{
+    $data= DevelopmentCourse::select('name','slug')->where('status',1)->orderBy('serial')->get();
+    // dd($data);
+    return  $data;
 }

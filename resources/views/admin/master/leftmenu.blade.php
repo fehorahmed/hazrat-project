@@ -141,6 +141,9 @@
                             <a href="{{ route('admin.config.course.index') }}">Courses</a>
                         </li>
                         <li>
+                            <a href="{{ route('admin.config.development-course.index') }}">Development Courses</a>
+                        </li>
+                        <li>
                             <a href="{{ route('admin.config.versity.index') }}">Versity</a>
                         </li>
                         <li>

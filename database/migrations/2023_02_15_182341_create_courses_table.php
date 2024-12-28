@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->longText('text')->nullable();
             $table->boolean('status')->default(1);
+            $table->unsignedTinyInteger('serial')->default(1);
             $table->foreignId('created_by');
             $table->timestamps();
         });
