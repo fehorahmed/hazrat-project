@@ -57,13 +57,36 @@ function getFile($file)
 }
 function getMenuCourses()
 {
-    $data= Course::select('name','slug')->where('status',1)->orderBy('serial')->get();
+    $data = Course::select('name', 'slug')->where('status', 1)->orderBy('serial')->get();
     // dd($data);
     return  $data;
 }
 function getMenuSkillDevelopments()
 {
-    $data= DevelopmentCourse::select('name','slug')->where('status',1)->orderBy('serial')->get();
+    $data = DevelopmentCourse::select('name', 'slug')->where('status', 1)->orderBy('serial')->get();
     // dd($data);
     return  $data;
+}
+function getAllSessions()
+{
+    $data = [];
+    $year = (int) date('Y');
+    for ($i = $year; $i > 2015; $i--) {
+        array_push($data, $i . '-' . $i + 1);
+    }
+    return  $data;
+}
+function getAllSemesters()
+{
+    $data = [];
+    for ($i = 1; $i < 9; $i++) {
+        $suffix = match ($i) {
+            1 => 'st',
+            2 => 'nd',
+            3 => 'rd',
+            default => 'th',
+        };
+        $data[$i] = "{$i}{$suffix} Semester";
+    }
+    return $data;
 }

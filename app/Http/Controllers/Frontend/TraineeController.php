@@ -35,7 +35,7 @@ class TraineeController extends Controller
 
         if (Auth::guard('trainee')->attempt($credentials)) {
             // dd($request->all());
-            return redirect()->route('trainee.application.index');
+            return redirect()->route('trainee.dashboard');
         }
         return redirect()->back()->with('error', 'Something went wrong.');
     }
@@ -51,12 +51,24 @@ class TraineeController extends Controller
 
     public function registerPost(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $request->validate([
-            'name' => 'required|string',
-            'phone' => 'required|numeric|unique:trainees,phone',
+            'name' => 'required|string|max:255',
             'email' => 'required|email|unique:trainees,email',
-            'password' => 'required|string|confirmed',
+            'password' => 'required|string|confirmed|min:6',
+            'phone' => 'required|numeric|unique:trainees,phone',
+            'nid' => 'required|numeric',
+            'father_name' => 'required|string|max:255',
+            'mother_name' => 'required|string|max:255',
+            'bn_name' => 'required|string|max:255',
+            'bn_father_name' => 'required|string|max:255',
+            'bn_mother_name' => 'required|string|max:255',
+            'versity' => 'required|numeric',
+            'session' => 'required|string|max:255',
+            'department' => 'required|numeric',
+            'semester' => 'required|string|max:255',
+            'photo' => 'required|image|mimes:jpeg,jpg,png|max:300',
+            'signature' => 'required|image|mimes:jpeg,jpg,png|max:100',
         ]);
 
         $u_ck = User::latest()->first();
@@ -72,6 +84,18 @@ class TraineeController extends Controller
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->password = Hash::make($request->password);
+        $user->nid = $request->nid;
+        $user->father_name = $request->father_name;
+        $user->mother_name = $request->mother_name;
+        $user->bn_name = $request->bn_name;
+        $user->bn_father_name = $request->bn_father_name;
+        $user->bn_mother_name = $request->bn_mother_name;
+        $user->versity_id = $request->versity;
+        $user->session = $request->session;
+        $user->department_id = $request->department;
+        $user->semester = $request->semester;
+        $user->photo =  saveImage('photo',$request->photo);
+        $user->signature =  saveImage('signature',$request->signature);
         $user->status = 1;
         $user->save();
         return redirect()->route('trainee.login')->with('success', 'Registration Success. Please Login Here.');
@@ -98,5 +122,10 @@ class TraineeController extends Controller
         $data->min_age = $request->min_age;
         $data->save();
         return redirect()->back()->with('success', 'Age Update Successfully.');
+    }
+    public function dashboard()
+    {
+
+        return view('frontend.trainee.dashboard');
     }
 }

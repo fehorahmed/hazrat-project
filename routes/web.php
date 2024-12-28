@@ -10,6 +10,7 @@ use App\Http\Controllers\Frontend\TraineeController;
 use App\Http\Controllers\Admin\InstituteTypeController;
 use App\Http\Controllers\Admin\CourseDurationController;
 use App\Http\Controllers\Admin\ApplicationDateController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DevelopmentCourseController;
 use App\Http\Controllers\Frontend\TraineeNewPasswordController;
 use App\Http\Controllers\Frontend\TraineePasswordResetLinkController;
@@ -78,6 +79,7 @@ Route::post('/register', [TraineeController::class, 'registerPost'])->name('trai
 
 
 Route::group(['middleware' => ['trainee'], 'prefix' => 'trainee'], function () {
+    Route::get('/dashboard', [TraineeController::class, 'dashboard'])->name('trainee.dashboard');
     Route::get('/application', [\App\Http\Controllers\Frontend\ApplicationController::class, 'index'])->name('trainee.application.index');
     Route::get('/application-create', [\App\Http\Controllers\Frontend\ApplicationController::class, 'create'])->name('trainee.application.create');
     Route::post('/application-create', [\App\Http\Controllers\Frontend\ApplicationController::class, 'store'])->name('trainee.application.store');
@@ -98,6 +100,9 @@ Route::group(['middleware' => ['auth:web,trainee'], 'prefix' => 'admin'], functi
     Route::get('get-district', [\App\Http\Controllers\DistrictController::class, 'getDistrictByDivision'])->name('get.district');
     Route::get('get-sub-district', [\App\Http\Controllers\UpazilaController::class, 'getSubDistrictByDistrict'])->name('get.sub_district');
     Route::get('get-unions', [\App\Http\Controllers\UnionController::class, 'getUnionBySubDistrict'])->name('get.unions');
+});
+Route::group(['prefix' => 'common'], function () {
+    Route::get('/', [DepartmentController::class, 'getDepartmentByVersity'])->name('get.department.by.versity');
 });
 Route::group(['middleware' => ['auth:web'], 'prefix' => 'admin'], function () {
 
@@ -157,14 +162,15 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => 'admin'], function () {
             Route::post('/edit/{id}', [VersityController::class, 'update'])->name('admin.config.versity.update');
             Route::get('/export', [VersityController::class, 'export'])->name('admin.config.versity.export');
         });
-        Route::group(['prefix' => 'quota'], function () {
-            Route::get('/', [QuotasController::class, 'index'])->name('admin.config.quota.index');
-            Route::get('/create', [QuotasController::class, 'create'])->name('admin.config.quota.create');
-            Route::post('/create', [QuotasController::class, 'store'])->name('admin.config.quota.store');
-            Route::get('/edit/{id}', [QuotasController::class, 'edit'])->name('admin.config.quota.edit');
-            Route::post('/edit/{id}', [QuotasController::class, 'update'])->name('admin.config.quota.update');
-            Route::get('/export', [QuotasController::class, 'export'])->name('admin.config.quota.export');
+        Route::group(['prefix' => 'department'], function () {
+            Route::get('/', [DepartmentController::class, 'index'])->name('admin.config.department.index');
+            Route::get('/create', [DepartmentController::class, 'create'])->name('admin.config.department.create');
+            Route::post('/create', [DepartmentController::class, 'store'])->name('admin.config.department.store');
+            Route::get('/edit/{id}', [DepartmentController::class, 'edit'])->name('admin.config.department.edit');
+            Route::post('/edit/{id}', [DepartmentController::class, 'update'])->name('admin.config.department.update');
+            Route::get('/export', [DepartmentController::class, 'export'])->name('admin.config.department.export');
         });
+
         Route::group(['prefix' => 'institute-type'], function () {
             Route::get('/', [InstituteTypeController::class, 'index'])->name('admin.config.institute.type.index');
             Route::get('/create', [InstituteTypeController::class, 'create'])->name('admin.config.institute.type.create');
@@ -204,6 +210,9 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => 'admin'], function () {
     // Feedback
     Route::get('/trainee-feedback', [\App\Http\Controllers\TraineeFeedbackController::class, 'adminIndex'])->name('admin.feedback.index');
 });
+
+
+
 
 
 Route::get('/clear', function () {

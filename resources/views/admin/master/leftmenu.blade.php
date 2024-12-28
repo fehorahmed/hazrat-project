@@ -147,7 +147,7 @@
                             <a href="{{ route('admin.config.versity.index') }}">Versity</a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.config.quota.index') }}">Quota</a>
+                            <a href="{{ route('admin.config.department.index') }}">Department</a>
                         </li>
                         <li>
                             <a href="{{ route('admin.config.institute.type.index') }}">Institute Type</a>

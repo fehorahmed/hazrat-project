@@ -21,17 +21,17 @@
                     @endif
                 </div>
             </div>
-            <form class="form" action="{{ route('trainee.register.post') }}" method="POST">
+            <form class="form" action="{{ route('trainee.register.post') }}" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-12">
                         @csrf
                         <div class="form-group">
                             <label for="">Name (English)</label>
-                            <input name="name" type="text" placeholder="Name">
+                            <input name="name" type="text" value="{{ old('name') }}" placeholder="Name">
                         </div>
                         <div class="form-group">
                             <label for="">Email</label>
-                            <input name="email" type="text" placeholder="Email">
+                            <input name="email" type="text" value="{{ old('email') }}" placeholder="Email">
                         </div>
                         <div class="form-group">
                             <label for="">Password</label>
@@ -39,39 +39,43 @@
                         </div>
                         <div class="form-group">
                             <label for="">Confirm Password</label>
-                            <input name="password_confirmed" type="password" placeholder="Confirm Password">
+                            <input name="password_confirmation" type="password" placeholder="Confirm Password">
                         </div>
                         <div class="form-group">
                             <label for="">NID</label>
-                            <input name="nid" type="text" placeholder="NID">
+                            <input name="nid" type="text" value="{{ old('email') }}" placeholder="NID">
                         </div>
                         <div class="form-group">
                             <label for="">Phone</label>
-                            <input name="phone" type="text" placeholder="Phone">
+                            <input name="phone" type="text" value="{{ old('phone') }}" placeholder="Phone">
                         </div>
                         <div class="form-group">
                             <label for="">Father Name (English)</label>
-                            <input name="father_name" type="text" placeholder="Father Name">
+                            <input name="father_name" type="text" value="{{ old('father_name') }}"
+                                placeholder="Father Name">
                         </div>
                         <div class="form-group">
                             <label for="">Mother Name (English)</label>
-                            <input name="mother_name" type="text" placeholder="Mother Name">
+                            <input name="mother_name" type="text" value="{{ old('mother_name') }}"
+                                placeholder="Mother Name">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12 col-12">
 
                         <div class="form-group">
                             <label for="">Name (Bangla)</label>
-                            <input name="bn_name" type="text" placeholder="Name">
+                            <input name="bn_name" type="text" placeholder="Name" value="{{ old('bn_name') }}">
                         </div>
 
                         <div class="form-group">
                             <label for="">Father Name (Bangla)</label>
-                            <input name="bn_father_name" type="text" placeholder="Father Name">
+                            <input name="bn_father_name" type="text" placeholder="Father Name"
+                                value="{{ old('bn_father_name') }}">
                         </div>
                         <div class="form-group">
                             <label for="">Mother Name (Bangla)</label>
-                            <input name="bn_mother_name" type="text" placeholder="Mother Name">
+                            <input name="bn_mother_name" type="text" placeholder="Mother Name"
+                                value="{{ old('bn_mother_name') }}">
                         </div>
                         <div class="form-group">
                             <label for="">Picture (300*300)</label>
@@ -91,7 +95,8 @@
                                     <select class="nice-select form-control wide" name="versity" id="versity">
                                         <option value="">Select Versity</option>
                                         @foreach ($versities as $versity)
-                                            <option value="{{ $versity->id }}">{{ $versity->name }}</option>
+                                            <option {{ old('versity') == $versity->id ? 'selected' : '' }}
+                                                value="{{ $versity->id }}">{{ $versity->name }}</option>
                                         @endforeach
 
                                     </select>
@@ -100,9 +105,14 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="">Select Session</label>
-                                    <select class="nice-select form-control wide" name="department" id="department">
+                                    <select class="nice-select form-control wide" name="session" id="session">
                                         <option value="">Select Session</option>
-                                        <option value="1st">1st Semester</option>
+                                        @foreach (getAllSessions() as $item)
+                                            <option {{ old('session') == $item ? 'selected' : '' }}
+                                                value="{{ $item }}">{{ $item }}</option>
+                                        @endforeach
+
+
                                     </select>
                                 </div>
                             </div>
@@ -111,7 +121,6 @@
                                     <label for="">Select Department</label>
                                     <select class="nice-select form-control wide" name="department" id="department">
                                         <option value="">Select Department</option>
-                                        <option value="1st">1st Semester</option>
                                     </select>
                                 </div>
                             </div>
@@ -120,7 +129,10 @@
                                     <label for="">Select Semester</label>
                                     <select class="nice-select form-control wide" name="semester" id="semester">
                                         <option value="">Select Semester</option>
-                                        <option value="1st">1st Semester</option>
+                                        @foreach (getAllSemesters() as $key => $item)
+                                            <option {{ old('semester') == $key ? 'selected' : '' }}
+                                                value="{{ $key }}">{{ $item }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -139,3 +151,42 @@
     </section>
     <!-- End Appointment -->
 @endsection
+
+@push('script')
+    <script>
+        $(function() {
+            var oldDepartment = "{{ old('department') }}";
+            $('#versity').change(function() {
+                var versity = $(this).val();
+                // console.log(versity);
+                $('#department').html(`<option value="">Select Department</option>`);
+                $.ajax({
+                    url: "{{ route('get.department.by.versity') }}", // Laravel route
+                    type: "GET", // Request method
+                    data: {
+                        versity_id: versity // CSRF token
+                    },
+                    success: function(response) {
+                        // Handle success
+                        $.each(response.datas, function(key, value) {
+                            if (oldDepartment == value.id) {
+                                $('#department').append(
+                                    `<option selected value="${value.id}">${value.name}</option>`
+                                );
+                            } else {
+                                $('#department').append(
+                                    `<option value="${value.id}">${value.name}</option>`
+                                );
+                            }
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error
+                        console.error(error);
+                    }
+                });
+            })
+            $('#versity').trigger('change')
+        })
+    </script>
+@endpush

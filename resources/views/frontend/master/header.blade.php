@@ -35,7 +35,7 @@
                      <div class="col-lg-2 col-md-2 col-12">
                          <!-- Start Logo -->
                          <div class="logo">
-                             <a href="index.html"><img src="{{ asset('front-assets') }}/img/logo.png"
+                             <a href="{{ route('home') }}"><img src="{{ asset('front-assets') }}/img/logo.png"
                                      alt="#"></a>
                          </div>
                          <!-- End Logo -->
@@ -85,8 +85,14 @@
                      </div>
                      <div class="col-lg-3 col-md-3 col-12">
                          <div class="get-quote">
-                             <a href="{{ route('trainee.login') }}" class="btn">Login </a>
-                             <a href="{{ route('trainee.register') }}" class="btn">Registration</a>
+                             @auth('trainee')
+                                 <a href="{{ route('trainee.dashboard') }}" class="btn">Dashboard </a>
+                                 <a href="{{ route('logout') }}" class="btn">Logout </a>
+                             @else
+                                 <a href="{{ route('trainee.login') }}" class="btn">Login </a>
+                                 <a href="{{ route('trainee.register') }}" class="btn">Registration</a>
+                             @endauth
+
                          </div>
                          {{-- <div class="get-quote">
                              <a href="appointment.html" class="btn">Registration</a>

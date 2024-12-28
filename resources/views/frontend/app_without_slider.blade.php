@@ -24,7 +24,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('front-assets') }}/css/bootstrap.min.css">
     <!-- Nice Select CSS -->
-    <link rel="stylesheet" href="{{ asset('front-assets') }}/css/nice-select.css">
+    {{-- <link rel="stylesheet" href="{{ asset('front-assets') }}/css/nice-select.css"> --}}
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="{{ asset('front-assets') }}/css/font-awesome.min.css">
     <!-- icofont CSS -->
@@ -110,7 +110,7 @@
     <!-- ScrollUp JS -->
     <script src="{{ asset('front-assets') }}/js/jquery.scrollUp.min.js"></script>
     <!-- Niceselect JS -->
-    <script src="{{ asset('front-assets') }}/js/niceselect.js"></script>
+    {{-- <script src="{{ asset('front-assets') }}/js/niceselect.js"></script> --}}
     <!-- Tilt Jquery JS -->
     <script src="{{ asset('front-assets') }}/js/tilt.jquery.min.js"></script>
     <!-- Owl Carousel JS -->
@@ -129,6 +129,8 @@
     <script src="{{ asset('front-assets') }}/js/bootstrap.min.js"></script>
     <!-- Main JS -->
     <script src="{{ asset('front-assets') }}/js/main.js"></script>
+
+    @stack('script')
 </body>
 
 </html>

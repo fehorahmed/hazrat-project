@@ -28,10 +28,12 @@ return new class extends Migration
             $table->string('nid')->nullable();
             $table->string('password');
 
+            $table->string('photo')->nullable();
+            $table->string('signature')->nullable();
             $table->foreignId('versity_id');
             $table->string('session');
             $table->foreignId('department_id');
-            $table->string('semester');
+            $table->foreignId('semester');
 
             $table->boolean('status')->default(1);
             $table->timestamps();
