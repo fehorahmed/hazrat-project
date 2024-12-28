@@ -42,6 +42,10 @@
                             <input name="password_confirmed" type="password" placeholder="Confirm Password">
                         </div>
                         <div class="form-group">
+                            <label for="">NID</label>
+                            <input name="nid" type="text" placeholder="NID">
+                        </div>
+                        <div class="form-group">
                             <label for="">Phone</label>
                             <input name="phone" type="text" placeholder="Phone">
                         </div>
