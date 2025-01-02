@@ -59,7 +59,7 @@
                                      <li><a href="#">Courses <i class="icofont-rounded-down"></i></a>
                                          <ul class="dropdown">
                                              @foreach (getMenuCourses() as $item)
-                                                 <li><a href="{{ $item->slug }}">{{ $item->name }}</a></li>
+                                                 <li><a href="{{ route('course.detail',$item->slug) }}">{{ $item->name }}</a></li>
                                              @endforeach
 
                                          </ul>
@@ -67,7 +67,7 @@
                                      <li><a href="#">Skill Development <i class="icofont-rounded-down"></i></a>
                                          <ul class="dropdown">
                                              @foreach (getMenuSkillDevelopments() as $item)
-                                                 <li><a href="{{ $item->slug }}">{{ $item->name }}</a></li>
+                                                 <li><a href="{{ route('development.course.detail',$item->slug) }}">{{ $item->name }}</a></li>
                                              @endforeach
 
                                          </ul>

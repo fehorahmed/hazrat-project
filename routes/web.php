@@ -78,6 +78,14 @@ Route::get('/register', [TraineeController::class, 'register'])->name('trainee.r
 Route::post('/register', [TraineeController::class, 'registerPost'])->name('trainee.register.post');
 
 
+Route::group(['prefix' => 'course'], function () {
+    Route::get('/{slug}', [CourseController::class, 'courseDetail'])->name('course.detail');
+});
+Route::group(['prefix' => 'decelopment-course'], function () {
+    Route::get('/{slug}', [DevelopmentCourseController::class, 'courseDetail'])->name('development.course.detail');
+});
+
+
 Route::group(['middleware' => ['trainee'], 'prefix' => 'trainee'], function () {
     Route::get('/dashboard', [TraineeController::class, 'dashboard'])->name('trainee.dashboard');
     Route::get('/application', [\App\Http\Controllers\Frontend\ApplicationController::class, 'index'])->name('trainee.application.index');

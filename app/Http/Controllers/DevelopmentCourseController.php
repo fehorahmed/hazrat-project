@@ -96,14 +96,17 @@ class DevelopmentCourseController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\DevelopmentCourse  $developmentCourse
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(DevelopmentCourse $developmentCourse)
+
+    public function courseDetail($slug)
     {
-        //
+        $data = DevelopmentCourse::where('slug',$slug)->first();
+
+        if(!$data){
+            return response()->json([
+                'message'=>'Not found.'
+            ]);
+        }
+
+        return view('frontend.development_course_detail',compact('data'));
     }
 }

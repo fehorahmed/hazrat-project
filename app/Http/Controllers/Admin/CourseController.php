@@ -132,4 +132,17 @@ class CourseController extends Controller
     {
         //
     }
+
+    public function courseDetail($slug)
+    {
+        $data = Course::where('slug',$slug)->first();
+
+        if(!$data){
+            return response()->json([
+                'message'=>'Not found.'
+            ]);
+        }
+
+        return view('frontend.course_detail',compact('data'));
+    }
 }
