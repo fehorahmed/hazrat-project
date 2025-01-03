@@ -28,36 +28,61 @@
                         <div class="form-group">
                             <label for="">Name (English)</label>
                             <input name="name" type="text" value="{{ old('name') }}" placeholder="Name">
+                            @error('name')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+
                         </div>
                         <div class="form-group">
                             <label for="">Email</label>
                             <input name="email" type="text" value="{{ old('email') }}" placeholder="Email">
+                            @error('email')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="">Password</label>
                             <input name="password" type="password" placeholder="Password">
+                            @error('password')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="">Confirm Password</label>
                             <input name="password_confirmation" type="password" placeholder="Confirm Password">
+                            @error('password_confirmation')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="">NID</label>
-                            <input name="nid" type="text" value="{{ old('email') }}" placeholder="NID">
+                            <input name="nid" type="text" value="{{ old('nid') }}" placeholder="NID">
+                            @error('nid')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="">Phone</label>
                             <input name="phone" type="text" value="{{ old('phone') }}" placeholder="Phone">
+                            @error('phone')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="">Father Name (English)</label>
                             <input name="father_name" type="text" value="{{ old('father_name') }}"
                                 placeholder="Father Name">
+                            @error('father_name')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="">Mother Name (English)</label>
                             <input name="mother_name" type="text" value="{{ old('mother_name') }}"
                                 placeholder="Mother Name">
+                            @error('mother_name')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12 col-12">
@@ -65,29 +90,44 @@
                         <div class="form-group">
                             <label for="">Name (Bangla)</label>
                             <input name="bn_name" type="text" placeholder="Name" value="{{ old('bn_name') }}">
+                            @error('bn_name')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="">Father Name (Bangla)</label>
                             <input name="bn_father_name" type="text" placeholder="Father Name"
                                 value="{{ old('bn_father_name') }}">
+                            @error('bn_father_name')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="">Mother Name (Bangla)</label>
                             <input name="bn_mother_name" type="text" placeholder="Mother Name"
                                 value="{{ old('bn_mother_name') }}">
+                            @error('bn_mother_name')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="">Picture (300*300)</label>
                             <input name="photo" type="file" placeholder="Your Photo">
+                            @error('photo')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="">Signature (300*80)</label>
                             <input name="signature" type="file" placeholder="Your Signature">
+                            @error('signature')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
-                    <div class="col-lg-12 col-md-12 ">
+                    {{-- <div class="col-lg-12 col-md-12 ">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -137,7 +177,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-lg-12 col-md-12 ">
                         <div class="form-group">
                             <div class="button">

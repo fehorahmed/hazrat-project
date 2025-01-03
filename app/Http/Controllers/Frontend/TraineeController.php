@@ -63,10 +63,10 @@ class TraineeController extends Controller
             'bn_name' => 'required|string|max:255',
             'bn_father_name' => 'required|string|max:255',
             'bn_mother_name' => 'required|string|max:255',
-            'versity' => 'required|numeric',
-            'session' => 'required|string|max:255',
-            'department' => 'required|numeric',
-            'semester' => 'required|string|max:255',
+            // 'versity' => 'required|numeric',
+            // 'session' => 'required|string|max:255',
+            // 'department' => 'required|numeric',
+            // 'semester' => 'required|string|max:255',
             'photo' => 'required|image|mimes:jpeg,jpg,png|max:300',
             'signature' => 'required|image|mimes:jpeg,jpg,png|max:100',
         ]);
@@ -90,10 +90,10 @@ class TraineeController extends Controller
         $user->bn_name = $request->bn_name;
         $user->bn_father_name = $request->bn_father_name;
         $user->bn_mother_name = $request->bn_mother_name;
-        $user->versity_id = $request->versity;
-        $user->session = $request->session;
-        $user->department_id = $request->department;
-        $user->semester = $request->semester;
+        // $user->versity_id = $request->versity;
+        // $user->session = $request->session;
+        // $user->department_id = $request->department;
+        // $user->semester = $request->semester;
         $user->photo =  saveImage('photo',$request->photo);
         $user->signature =  saveImage('signature',$request->signature);
         $user->status = 1;

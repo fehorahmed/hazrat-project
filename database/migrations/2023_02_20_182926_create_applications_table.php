@@ -37,6 +37,13 @@ return new class extends Migration
             $table->foreign('course_id')->on('courses')->references('id');
             $table->string('mobile');
             $table->string('blood_group');
+
+            $table->foreignId('versity_id');
+            $table->string('session');
+            $table->foreignId('department_id');
+            $table->foreignId('semester');
+
+
             $table->unsignedTinyInteger('status')->default(1)->comment('0=Canceled, 1=Applied, 2= Approved, 3=Enroll, 4= Rejected, 5=Passed, 6= Failed');
             $table->foreignId('created_by')->comment('trainee ID');
             $table->foreign('created_by')->on('trainees')->references('id');

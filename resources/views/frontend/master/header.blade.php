@@ -59,7 +59,9 @@
                                      <li><a href="#">Courses <i class="icofont-rounded-down"></i></a>
                                          <ul class="dropdown">
                                              @foreach (getMenuCourses() as $item)
-                                                 <li><a href="{{ route('course.detail',$item->slug) }}">{{ $item->name }}</a></li>
+                                                 <li><a
+                                                         href="{{ route('course.detail', $item->slug) }}">{{ $item->name }}</a>
+                                                 </li>
                                              @endforeach
 
                                          </ul>
@@ -67,7 +69,9 @@
                                      <li><a href="#">Skill Development <i class="icofont-rounded-down"></i></a>
                                          <ul class="dropdown">
                                              @foreach (getMenuSkillDevelopments() as $item)
-                                                 <li><a href="{{ route('development.course.detail',$item->slug) }}">{{ $item->name }}</a></li>
+                                                 <li><a
+                                                         href="{{ route('development.course.detail', $item->slug) }}">{{ $item->name }}</a>
+                                                 </li>
                                              @endforeach
 
                                          </ul>
@@ -86,8 +90,16 @@
                      <div class="col-lg-3 col-md-3 col-12">
                          <div class="get-quote">
                              @auth('trainee')
-                                 <a href="{{ route('trainee.dashboard') }}" class="btn">Dashboard </a>
-                                 <a href="{{ route('logout') }}" class="btn">Logout </a>
+                                 <div class="d-flex justify-content-between">
+                                     <a href="{{ route('trainee.dashboard') }}" class="btn">Dashboard </a>
+                                     {{-- <a href="{{ route('logout') }}" class="btn">Logout </a> --}}
+                                     <div>
+                                         <form action="{{ route('logout') }}" method="POST">
+                                             @csrf
+                                             <button type="submit" class="btn">Logout</button>
+                                         </form>
+                                     </div>
+                                 </div>
                              @else
                                  <a href="{{ route('trainee.login') }}" class="btn">Login </a>
                                  <a href="{{ route('trainee.register') }}" class="btn">Registration</a>

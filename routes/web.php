@@ -10,6 +10,7 @@ use App\Http\Controllers\Frontend\TraineeController;
 use App\Http\Controllers\Admin\InstituteTypeController;
 use App\Http\Controllers\Admin\CourseDurationController;
 use App\Http\Controllers\Admin\ApplicationDateController;
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DevelopmentCourseController;
 use App\Http\Controllers\Frontend\TraineeNewPasswordController;
@@ -88,12 +89,6 @@ Route::group(['prefix' => 'decelopment-course'], function () {
 
 Route::group(['middleware' => ['trainee'], 'prefix' => 'trainee'], function () {
     Route::get('/dashboard', [TraineeController::class, 'dashboard'])->name('trainee.dashboard');
-    Route::get('/application', [\App\Http\Controllers\Frontend\ApplicationController::class, 'index'])->name('trainee.application.index');
-    Route::get('/application-create', [\App\Http\Controllers\Frontend\ApplicationController::class, 'create'])->name('trainee.application.create');
-    Route::post('/application-create', [\App\Http\Controllers\Frontend\ApplicationController::class, 'store'])->name('trainee.application.store');
-    Route::get('/application/{id}/edit', [\App\Http\Controllers\Frontend\ApplicationController::class, 'edit'])->name('trainee.application.edit');
-    Route::post('/application/{id}/edit', [\App\Http\Controllers\Frontend\ApplicationController::class, 'update'])->name('trainee.application.update');
-    //asdasd
 
     Route::get('/trainee/{application}/certificate', [\App\Http\Controllers\Admin\ApplicationController::class, 'certificate'])->name('trainee.application.certificate');
     Route::get('/{id}/view', [\App\Http\Controllers\Frontend\ApplicationController::class, 'show'])->name('trainee.application.view');
@@ -101,6 +96,14 @@ Route::group(['middleware' => ['trainee'], 'prefix' => 'trainee'], function () {
     // Route::get('/feedback', [\App\Http\Controllers\TraineeFeedbackController::class, 'index'])->name('trainee.feedback.index');
     Route::get('/feedback-create', [\App\Http\Controllers\TraineeFeedbackController::class, 'create'])->name('trainee.feedback.create');
     Route::post('/feedback-create', [\App\Http\Controllers\TraineeFeedbackController::class, 'store'])->name('trainee.feedback.store');
+
+    Route::get('/development-course-application/{slug}', [ApplicationController::class, 'developmentCourseApply'])->name('trainee.development-course.apply');
+
+
+
+
+
+
 });
 
 Route::group(['middleware' => ['auth:web,trainee'], 'prefix' => 'admin'], function () {
