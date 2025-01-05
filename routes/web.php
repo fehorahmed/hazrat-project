@@ -15,6 +15,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DevelopmentCourseController;
 use App\Http\Controllers\Frontend\TraineeNewPasswordController;
 use App\Http\Controllers\Frontend\TraineePasswordResetLinkController;
+use App\Http\Controllers\GlobalConfigController;
 use App\Http\Controllers\VersityController;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Fortify\Http\Controllers\NewPasswordController;
@@ -98,12 +99,6 @@ Route::group(['middleware' => ['trainee'], 'prefix' => 'trainee'], function () {
     Route::post('/feedback-create', [\App\Http\Controllers\TraineeFeedbackController::class, 'store'])->name('trainee.feedback.store');
 
     Route::get('/development-course-application/{slug}', [ApplicationController::class, 'developmentCourseApply'])->name('trainee.development-course.apply');
-
-
-
-
-
-
 });
 
 Route::group(['middleware' => ['auth:web,trainee'], 'prefix' => 'admin'], function () {
@@ -114,6 +109,11 @@ Route::group(['middleware' => ['auth:web,trainee'], 'prefix' => 'admin'], functi
 });
 Route::group(['prefix' => 'common'], function () {
     Route::get('/', [DepartmentController::class, 'getDepartmentByVersity'])->name('get.department.by.versity');
+});
+
+Route::group(['middleware' => ['auth:web'], 'prefix' => 'admin'], function () {
+    Route::get('/global', [GlobalConfigController::class, 'index'])->name('global.config');
+    Route::post('/global', [GlobalConfigController::class, 'store'])->name('global.config.update');
 });
 Route::group(['middleware' => ['auth:web'], 'prefix' => 'admin'], function () {
 

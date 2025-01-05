@@ -2,6 +2,7 @@
 
 use App\Models\Course;
 use App\Models\DevelopmentCourse;
+use App\Models\GlobalConfig;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
@@ -89,4 +90,9 @@ function getAllSemesters()
         $data[$i] = "{$i}{$suffix} Semester";
     }
     return $data;
+}
+function getGlobalConfig($key)
+{
+    $data = GlobalConfig::where('key', $key)->first();
+    return $data ? $data->value : null;
 }
