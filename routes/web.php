@@ -91,14 +91,15 @@ Route::group(['prefix' => 'decelopment-course'], function () {
 Route::group(['middleware' => ['trainee'], 'prefix' => 'trainee'], function () {
     Route::get('/dashboard', [TraineeController::class, 'dashboard'])->name('trainee.dashboard');
 
-    Route::get('/trainee/{application}/certificate', [\App\Http\Controllers\Admin\ApplicationController::class, 'certificate'])->name('trainee.application.certificate');
-    Route::get('/{id}/view', [\App\Http\Controllers\Frontend\ApplicationController::class, 'show'])->name('trainee.application.view');
+    // Route::get('/trainee/{application}/certificate', [\App\Http\Controllers\Admin\ApplicationController::class, 'certificate'])->name('trainee.application.certificate');
+    // Route::get('/{id}/view', [\App\Http\Controllers\Frontend\ApplicationController::class, 'show'])->name('trainee.application.view');
     //Feedback
     // Route::get('/feedback', [\App\Http\Controllers\TraineeFeedbackController::class, 'index'])->name('trainee.feedback.index');
     Route::get('/feedback-create', [\App\Http\Controllers\TraineeFeedbackController::class, 'create'])->name('trainee.feedback.create');
     Route::post('/feedback-create', [\App\Http\Controllers\TraineeFeedbackController::class, 'store'])->name('trainee.feedback.store');
 
     Route::get('/development-course-application/{slug}', [ApplicationController::class, 'developmentCourseApply'])->name('trainee.development-course.apply');
+    Route::post('/development-course-application/{slug}', [ApplicationController::class, 'developmentCourseApplyStore'])->name('trainee.development-course.store');
 });
 
 Route::group(['middleware' => ['auth:web,trainee'], 'prefix' => 'admin'], function () {

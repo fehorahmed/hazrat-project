@@ -17,9 +17,9 @@
                  <div class="col-lg-6 col-md-7 col-12">
                      <!-- Top Contact -->
                      <ul class="top-contact">
-                         <li><i class="fa fa-phone"></i>+880 1234 56789</li>
+                         <li><i class="fa fa-phone"></i>{{getGlobalConfig('phone')}}</li>
                          <li><i class="fa fa-envelope"></i><a
-                                 href="mailto:support@yourmail.com">support@yourmail.com</a></li>
+                                 href="mailto:support@yourmail.com">{{getGlobalConfig('application_email')}}</a></li>
                      </ul>
                      <!-- End Top Contact -->
                  </div>
@@ -35,8 +35,14 @@
                      <div class="col-lg-2 col-md-2 col-12">
                          <!-- Start Logo -->
                          <div class="logo">
-                             <a href="{{ route('home') }}"><img src="{{ asset('front-assets') }}/img/logo.png"
-                                     alt="#"></a>
+                             <a href="{{ route('home') }}">
+                                 @if (getGlobalConfig('application_logo'))
+                                     <img src="{{ asset(getGlobalConfig('application_logo')) }}" style="height: 33px; width:160px;" alt="#">
+                             </a>
+                         @else
+                             <img src="{{ asset('front-assets') }}/img/logo.png" alt="#"></a>
+                             @endif
+
                          </div>
                          <!-- End Logo -->
                          <!-- Mobile Nav -->

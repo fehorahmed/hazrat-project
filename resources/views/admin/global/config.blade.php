@@ -57,6 +57,18 @@
                                         </div>
 
                                     </div>
+                                    <div class="row mb-3">
+                                        <label for="phone" class="col-12 col-md-3 col-form-label">Phone</label>
+                                        <div class="col-12 col-md-9">
+                                            <input type="phone" name="phone"
+                                                value="{{ getGlobalConfig('phone') }}" id="phone"
+                                                class="form-control" placeholder="Enter phone">
+                                            @error('phone')
+                                                <div class="help-block text-danger">{{ $message }} </div>
+                                            @enderror
+                                        </div>
+
+                                    </div>
 
                                     <div class="row mb-3">
                                         <label for="address" class="col-12 col-md-3 col-form-label">Address</label>

@@ -40,6 +40,7 @@ class GlobalConfigController extends Controller
         $request->validate([
             "application_name" => 'required|max:100',
             "application_email" => 'required|max:100',
+            "phone" => 'required|max:100',
             "address" => 'required|max:100',
             "application_logo" => 'nullable|image|mimes:jpeg,jpg,png|max:1024',
         ]);
