@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </div>
-            <form class="form" action="{{ route('trainee.development-course.store', $data->slug) }}" method="POST"
+            <form class="form" action="{{ route('trainee.course.store', $data->slug) }}" method="POST"
                 enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-12">

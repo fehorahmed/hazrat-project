@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->unsignedTinyInteger('course_type')->default(1)->comment('1=General Course, 2=Development Course');
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->string('course_code')->unique();

@@ -80,11 +80,11 @@ Route::get('/register', [TraineeController::class, 'register'])->name('trainee.r
 Route::post('/register', [TraineeController::class, 'registerPost'])->name('trainee.register.post');
 
 
+// Route::group(['prefix' => 'course'], function () {
+//     Route::get('/{slug}', [CourseController::class, 'courseDetail'])->name('course.detail');
+// });
 Route::group(['prefix' => 'course'], function () {
     Route::get('/{slug}', [CourseController::class, 'courseDetail'])->name('course.detail');
-});
-Route::group(['prefix' => 'decelopment-course'], function () {
-    Route::get('/{slug}', [DevelopmentCourseController::class, 'courseDetail'])->name('development.course.detail');
 });
 
 
@@ -98,8 +98,8 @@ Route::group(['middleware' => ['trainee'], 'prefix' => 'trainee'], function () {
     Route::get('/feedback-create', [\App\Http\Controllers\TraineeFeedbackController::class, 'create'])->name('trainee.feedback.create');
     Route::post('/feedback-create', [\App\Http\Controllers\TraineeFeedbackController::class, 'store'])->name('trainee.feedback.store');
 
-    Route::get('/development-course-application/{slug}', [ApplicationController::class, 'developmentCourseApply'])->name('trainee.development-course.apply');
-    Route::post('/development-course-application/{slug}', [ApplicationController::class, 'developmentCourseApplyStore'])->name('trainee.development-course.store');
+    Route::get('/course-application/{slug}', [ApplicationController::class, 'courseApply'])->name('trainee.course.apply');
+    Route::post('/course-application/{slug}', [ApplicationController::class, 'courseApplyStore'])->name('trainee.course.store');
 });
 
 Route::group(['middleware' => ['auth:web,trainee'], 'prefix' => 'admin'], function () {
@@ -116,20 +116,20 @@ Route::group(['prefix' => 'common'], function () {
 Route::group(['middleware' => ['auth:web'], 'prefix' => 'admin'], function () {
 
     Route::group(['prefix' => 'application'], function () {
-        Route::get('/', [\App\Http\Controllers\Admin\ApplicationController::class, 'index'])->name('admin.application.index');
+        Route::get('/', [ApplicationController::class, 'index'])->name('admin.application.index');
         Route::get('/approved', [\App\Http\Controllers\Admin\ApplicationController::class, 'approvedIndex'])->name('admin.application.approved');
         Route::get('/canceled', [\App\Http\Controllers\Admin\ApplicationController::class, 'canceledIndex'])->name('admin.application.canceled');
         Route::get('/create', [\App\Http\Controllers\Admin\ApplicationController::class, 'create'])->name('admin.application.create');
         Route::post('/create', [\App\Http\Controllers\Admin\ApplicationController::class, 'store'])->name('admin.application.store');
         Route::get('/edit/{id}', [\App\Http\Controllers\Admin\ApplicationController::class, 'edit'])->name('admin.application.edit');
         Route::post('/edit/{id}', [\App\Http\Controllers\Admin\ApplicationController::class, 'update'])->name('admin.application.update');
-        Route::get('/{id}/view', [\App\Http\Controllers\Admin\ApplicationController::class, 'show'])->name('admin.application.view');
-        Route::get('/export', [\App\Http\Controllers\Admin\ApplicationController::class, 'export'])->name('admin.application.export');
-        Route::get('/approve', [\App\Http\Controllers\Admin\ApplicationController::class, 'approve'])->name('admin.application.approve');
-        Route::post('/change-status', [\App\Http\Controllers\Admin\ApplicationController::class, 'changeStatus'])->name('admin.application.multiple.status.change');
-        Route::post('/enrolled', [\App\Http\Controllers\Admin\ApplicationController::class, 'enrolled'])->name('admin.application.enrolled');
-        Route::post('/passed', [\App\Http\Controllers\Admin\ApplicationController::class, 'passed'])->name('admin.application.passed');
-        Route::post('/failed', [\App\Http\Controllers\Admin\ApplicationController::class, 'failed'])->name('admin.application.failed');
+        Route::get('/{id}/view', [ApplicationController::class, 'show'])->name('admin.application.view');
+        // Route::get('/export', [\App\Http\Controllers\Admin\ApplicationController::class, 'export'])->name('admin.application.export');
+        // Route::get('/approve', [\App\Http\Controllers\Admin\ApplicationController::class, 'approve'])->name('admin.application.approve');
+        // Route::post('/change-status', [\App\Http\Controllers\Admin\ApplicationController::class, 'changeStatus'])->name('admin.application.multiple.status.change');
+        // Route::post('/enrolled', [\App\Http\Controllers\Admin\ApplicationController::class, 'enrolled'])->name('admin.application.enrolled');
+        // Route::post('/passed', [\App\Http\Controllers\Admin\ApplicationController::class, 'passed'])->name('admin.application.passed');
+        // Route::post('/failed', [\App\Http\Controllers\Admin\ApplicationController::class, 'failed'])->name('admin.application.failed');
     });
     Route::get('/{application}/certificate', [\App\Http\Controllers\Admin\ApplicationController::class, 'certificate'])->name('admin.application.certificate');
     Route::group(['prefix' => 'courses'], function () {

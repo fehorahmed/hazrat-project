@@ -1,14 +1,22 @@
 @extends('frontend.app_without_slider')
 
 @section('content')
-
     <!-- Start Why choose -->
     <section class="why-choose section">
         <div class="container">
+            @if (session('success'))
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mb-2 text-success">
+                            <p class="alert alert-success">{{ session('success') }}</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title mb-2">
-                        <h2>{{$data->name}}</h2>
+                        <h2>{{ $data->name }}</h2>
                         <img src="{{ asset('front-assets') }}/img/section-img.png" alt="#">
                         {{-- <p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p> --}}
                     </div>
@@ -18,6 +26,11 @@
                 <div class="col-lg-12 col-12 my-2">
                     {!! $data->text !!}
                 </div>
+                <div class="col-lg-12 col-12 text-center mt-4">
+                    <a href="{{ route('trainee.course.apply', $data->slug) }}"
+                        class="btn btn-primary text-light">Apply On</a>
+                </div>
+
             </div>
         </div>
     </section>

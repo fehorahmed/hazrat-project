@@ -48,6 +48,7 @@
                                     <th>Course Code</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
+                                    <th>Course Type</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -62,6 +63,14 @@
                                         <td>{{ $data->end_date ?? '' }}</td>
 
 
+                                        <td>
+                                            @if ($data->course_type == 1)
+                                                <span class="badge bg-info ">General Course</span>
+                                            @endif
+                                            @if ($data->course_type == 2)
+                                                <span class="badge bg-secondary ">Development Course</span>
+                                            @endif
+                                        </td>
                                         <td>
                                             @if ($data->status == 1)
                                                 <span class="badge bg-success ">Active</span>

@@ -76,7 +76,7 @@
                                          <ul class="dropdown">
                                              @foreach (getMenuSkillDevelopments() as $item)
                                                  <li><a
-                                                         href="{{ route('development.course.detail', $item->slug) }}">{{ $item->name }}</a>
+                                                         href="{{ route('course.detail', $item->slug) }}">{{ $item->name }}</a>
                                                  </li>
                                              @endforeach
 

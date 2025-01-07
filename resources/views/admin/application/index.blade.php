@@ -82,37 +82,18 @@
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="col-md-2">
-                                    <div class="mb-3">
-                                        <label for="example-select" class="form-label">Division</label>
-                                        <select name="division" class="form-select" id="division">
-                                            <option value="">Select One</option>
-                                            @foreach ($divisions as $division)
-                                                <option {{ request('division') == $division->id ? 'selected' : '' }}
-                                                    value="{{ $division->id }}">{{ $division->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="mb-3">
-                                        <label for="example-select" class="form-label">District</label>
-                                        <select name="district" class="form-select" id="district">
-                                            <option value="">Select One</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="mb-3">
-                                        <label for="example-select" class="form-label">Upazila</label>
-                                        <select name="upazila" class="form-select" id="sub_district">
-                                            <option value="">Select One</option>
-                                        </select>
+                                    <div class="mb-3 text-end">
+                                        <button type="submit" name="submit" value="search"
+                                            class="btn btn-primary ps-3 pe-3">Search
+                                        </button>
+                                        {{-- <button type="submit" name="export" value="export"
+                                            class="btn btn-warning ms-2 ps-3 pe-3">Preview
+                                        </button> --}}
                                     </div>
                                 </div>
 
-                                <div class="col-md-2">
+                                {{-- <div class="col-md-2">
                                     <div class="mb-3">
                                         <label class="form-label">Date From</label>
                                         <input type="date" name="start_date" value="{{ request('start_date') }}"
@@ -125,18 +106,11 @@
                                         <input type="date" name="end_date" value="{{ request('end_date') }}"
                                             class="form-control">
                                     </div>
-                                </div>
+                                </div> --}}
 
                             </div>
                             <div class="row">
-                                <div class="mb-3 text-end">
-                                    <button type="submit" name="submit" value="search"
-                                        class="btn btn-primary ps-3 pe-3">Search
-                                    </button>
-                                    <button type="submit" name="export" value="export"
-                                        class="btn btn-warning ms-2 ps-3 pe-3">Preview
-                                    </button>
-                                </div>
+
 
                             </div>
                         </form>
@@ -148,11 +122,10 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Course Name</th>
-                                            <th>Name</th>
-                                            <th>Father Name</th>
+                                            <th>Details</th>
                                             <th>Email/Phone</th>
+                                            <th>Education</th>
                                             <th>NID/BR</th>
-                                            <th>Address</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -162,28 +135,36 @@
                                         @foreach ($datas as $data)
                                             <tr>
                                                 <td>
-                                                    {{-- <div class="form-check form-switch">
-                                                        <input type="checkbox" class="form-check-input"
-                                                            id="customSwitch1">
+                                                    {{ $loop->iteration }}
+                                                </td>
+                                                <td>
+                                                {{ $data->course->name ?? '' }} <br>
+                                                <strong> Batch :</strong> {{ $data->batch_id ?? '' }}
 
-                                                    </div> --}}
-                                                    <input type="checkbox" class="application_id" name="application_id[]"
-                                                        value="{{ $data->id }}">
                                                 </td>
-                                                <td>{{ $data->course->name ?? '' }}</td>
-                                                <td>{{ $data->father_name ?? '' }}</td>
-                                                <td>{{ $data->name ?? '' }}</td>
+
                                                 <td>
-                                                    <strong>Email:</strong> {{ $data->trainee->email ?? '' }} <br>
-                                                    <strong>Phone:</strong> {{ $data->mobile ?? '' }}
+                                                    <strong>Name :</strong> {{ $data->trainee->name ?? '' }} <br>
+                                                    <strong>Father Name :</strong> {{ $data->trainee->father_name ?? '' }}
                                                 </td>
-                                                <td>{{ $data->nid ?? '' }}</td>
                                                 <td>
-                                                    <strong> Division:</strong> {{ $data->division->name ?? '' }},<br>
-                                                    <strong> District:</strong> {{ $data->district->name ?? '' }},<br>
-                                                    <strong>Upazila: </strong>{{ $data->upazila->name ?? '' }},
-                                                    <strong>Address: </strong>{{ $data->address ?? '' }}
+                                                    <strong>Email :</strong> {{ $data->trainee->email ?? '' }} <br>
+                                                    <strong>Phone :</strong> {{ $data->trainee->phone ?? '' }}
                                                 </td>
+                                                <td>
+                                                    <strong> Versity :</strong> {{ $data->versity->name ?? '' }} <br>
+                                                    <strong> Department :</strong> {{ $data->department->name ?? '' }} <br>
+                                                    <strong> Semester :</strong> {{ getSemester($data->semester) }} <br>
+                                                    <strong> Session :</strong> {{ $data->session ?? '' }}
+                                                </td>
+
+                                                <td>{{ $data->trainee->nid ?? '' }}</td>
+                                                {{-- <td>
+                                                    <strong> Division:</strong> {{ $data->trainee->division->name ?? '' }},<br>
+                                                    <strong> District:</strong> {{ $data->trainee->district->name ?? '' }},<br>
+                                                    <strong>Upazila: </strong>{{ $data->trainee->upazila->name ?? '' }},
+                                                    <strong>Address: </strong>{{ $data->trainee->address ?? '' }}
+                                                </td> --}}
                                                 <td>
                                                     @if ($data->status == 0)
                                                         <span class="badge bg-danger ">Inactive</span>
@@ -205,29 +186,12 @@
                                                             class="mt-1 btn btn-success btn-sm btn-approved">
                                                             Approved </button>
                                                     @endif
-                                                    @if ($data->status == 2)
-                                                        <button role="button" data-id="{{ $data->id }}"
-                                                            class="mt-1 btn btn-success btn-sm btn-enroll">
-                                                            Enroll </button>
-                                                    @endif
+
                                                 </td>
 
                                             </tr>
                                         @endforeach
-                                        <tr>
-                                            <td colspan="9" class="text-end">
-                                                @if (request()->routeIs('admin.application.index'))
-                                                    <input type="hidden" name="submit_type" value="Approved">
-                                                    <input type="submit" value="Approved" style="display: none;"
-                                                        class="btn btn-primary" id="myButton">
-                                                @elseif (request()->routeIs('admin.application.approved'))
-                                                    <input type="hidden" name="submit_type" value="Disapproved">
-                                                    <input type="submit" value="Disapproved" style="display: none;"
-                                                        class="btn btn-danger" id="myButton">
-                                                @endif
 
-                                            </td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </form>
@@ -263,91 +227,7 @@
         });
 
         $(function() {
-            var districtSelected =
-                '{{ request('district', \Illuminate\Support\Facades\Auth::user()->district_id) }}'
-            $('#division').on('change', function() {
-                var division_id = $(this).val();
-                $('#district').html('<option value="">Select district</option>');
 
-                $.ajax({
-                    method: "GET",
-                    url: '{{ route('get.district') }}',
-                    data: {
-                        division_id: division_id
-                    }
-                }).done(function(data) {
-                    $.each(data, function(index, item) {
-                        if (districtSelected == item.id) {
-                            $('#district').append('<option selected value="' + item.id +
-                                '" selected>' + item.name + '</option>');
-                        } else {
-                            $('#district').append('<option value="' + item.id + '">' + item
-                                .name + '</option>');
-                        }
-                    });
-
-                    $('#district').trigger('change');
-                });
-
-            });
-
-            // personal address
-            $('#division').trigger('change');
-            var subDistrictSelected = '{{ request('upazila') }}';
-            $('#district').on('change', function() {
-                var district_id = $(this).val();
-                $('#sub_district').html('<option value="">Select sub district</option>');
-                if (district_id != '' && district_id != null) {
-                    $.ajax({
-                        method: "GET",
-                        url: '{{ route('get.sub_district') }}',
-                        data: {
-                            district_id: district_id
-                        }
-                    }).done(function(data) {
-                        $.each(data, function(index, item) {
-                            if (subDistrictSelected == item.id) {
-                                $('#sub_district').append('<option selected value="' + item
-                                    .id +
-                                    '" selected>' + item.name + '</option>');
-                            } else {
-                                $('#sub_district').append('<option value="' + item.id +
-                                    '">' +
-                                    item.name + '</option>');
-                            }
-                        });
-                    });
-                }
-            });
-            $('#district').trigger('change');
-            var unionSelected = '{{ old('union') }}';
-            $('#sub_district').on('change', function() {
-                var sub_district_id = $(this).val();
-                $('#union').html('<option value="">Select union</option>');
-                if (sub_district_id != '' && sub_district_id != null) {
-                    $.ajax({
-                        method: "GET",
-                        url: '{{ route('get.unions') }}',
-                        data: {
-                            sub_district_id: sub_district_id
-                        }
-                    }).done(function(data) {
-                        $.each(data, function(index, item) {
-                            if (unionSelected == item.id) {
-                                $('#union').append('<option selected value="' + item
-                                    .id +
-                                    '" selected>' + item.name + '</option>');
-                            } else {
-                                $('#union').append('<option value="' + item.id +
-                                    '">' +
-                                    item.name + '</option>');
-                            }
-                        });
-                    });
-                }
-            });
-            $('#sub_district').trigger('change');
-            $('#division_area').hide()
 
 
             $('.btn-approved').on('click', function(event) {
@@ -357,7 +237,7 @@
                 if (result) {
                     $.ajax({
                         method: "GET",
-                        url: '{{ route('admin.application.approve') }}',
+                        // url: '',
                         data: {
                             id: app_id
                         }
@@ -385,7 +265,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: '{{ route('admin.application.enrolled') }}', // Replace with your endpoint URL
+                            url: '', // Replace with your endpoint URL
                             type: 'POST', // Replace with your desired HTTP method (e.g., POST, GET)
                             data: {
                                 app_id: app_id
@@ -448,7 +328,7 @@
                         var formData = $('#myForm').serialize(); // Serialize form data
                         console.log(formData);
                         $.ajax({
-                            url: '{{ route('admin.application.multiple.status.change') }}', // Replace with your endpoint URL
+                            url: '', // Replace with your endpoint URL
                             type: 'POST', // Replace with your desired HTTP method (e.g., POST, GET)
                             data: formData, // Send serialized form data
                             success: function(response) {

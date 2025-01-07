@@ -46,6 +46,7 @@ class CourseController extends Controller
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'text' => 'nullable|string|max:50000',
+            'course_type' => 'required|numeric',
             'status' => 'required|numeric',
         ]);
 
@@ -63,6 +64,7 @@ class CourseController extends Controller
         $data->slug = Str::slug($request->name, '-');
         $data->course_code = $request->course_code;
         $data->text = $request->text;
+        $data->course_type = $request->course_type;
         $data->status = $request->status;
         $data->start_date = $request->start_date;
         $data->end_date = $request->end_date;

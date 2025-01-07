@@ -20,8 +20,8 @@ return new class extends Migration
             $table->foreignId('trainee_id');
             $table->foreign('trainee_id')->on('trainees')->references('id');
 
-            $table->foreignId('development_course_id')->nullable();
-            $table->foreign('development_course_id')->on('development_courses')->references('id');
+            $table->foreignId('course_id');
+            $table->foreign('course_id')->on('courses')->references('id');
 
             $table->foreignId('batch_id')->nullable();
 

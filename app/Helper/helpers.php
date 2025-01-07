@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Course;
-use App\Models\DevelopmentCourse;
 use App\Models\GlobalConfig;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
@@ -58,13 +57,13 @@ function getFile($file)
 }
 function getMenuCourses()
 {
-    $data = Course::select('name', 'slug')->where('status', 1)->orderBy('serial')->get();
+    $data = Course::select('name', 'slug')->where('course_type',1)->where('status', 1)->orderBy('serial')->get();
     // dd($data);
     return  $data;
 }
 function getMenuSkillDevelopments()
 {
-    $data = DevelopmentCourse::select('name', 'slug')->where('status', 1)->orderBy('serial')->get();
+    $data = Course::select('name', 'slug')->where('course_type',2)->where('status', 1)->orderBy('serial')->get();
     // dd($data);
     return  $data;
 }
@@ -88,6 +87,22 @@ function getAllSemesters()
             default => 'th',
         };
         $data[$i] = "{$i}{$suffix} Semester";
+    }
+    return $data;
+}
+function getSemester($number)
+{
+    $data = '';
+    for ($i = 1; $i < 9; $i++) {
+        $suffix = match ($i) {
+            1 => 'st',
+            2 => 'nd',
+            3 => 'rd',
+            default => 'th',
+        };
+        if($i == $number){
+            $data = "{$i}{$suffix} Semester";
+        }
     }
     return $data;
 }

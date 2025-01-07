@@ -44,20 +44,20 @@
                                 <table class="table table-bordered">
                                     <tr>
                                         <th width="35%"> Applicant Name</th>
-                                        <td>{{ $data->name ?? '' }}</td>
+                                        <td>{{ $data->trainee->name ?? '' }}</td>
                                     </tr>
 
                                     <tr>
                                         <th>Applicant Father Name</th>
-                                        <td>{{ $data->father_name ?? '' }}</td>
+                                        <td>{{ $data->trainee->father_name ?? '' }}</td>
                                     </tr>
                                     <tr>
                                         <th>Applicant Mother Name</th>
-                                        <td>{{ $data->mother_name ?? '' }}</td>
+                                        <td>{{ $data->trainee->mother_name ?? '' }}</td>
                                     </tr>
                                     <tr>
                                         <th>National ID number</th>
-                                        <td>{{ $data->nid ?? '' }}</td>
+                                        <td>{{ $data->trainee->nid ?? '' }}</td>
                                     </tr>
                                     <tr>
                                         <th>Date of Birth</th>
@@ -69,7 +69,7 @@
                                     </tr>
                                     <tr>
                                         <th>Mobile</th>
-                                        <td>{{ $data->mobile ?? '' }}</td>
+                                        <td>{{ $data->trainee->phone ?? '' }}</td>
                                     </tr>
 
                                 </table>
@@ -78,48 +78,28 @@
                                 <div class="table-responsive">
                                     <table class="table table-borderless">
                                         <tr>
-                                            <td>Image</td>
-                                            <td>NID</td>
-                                        </tr>
-                                        <tr>
-                                            @if ($data->image)
-                                                <td class="text-center"><img src="{{ asset($data->image) }}" alt=""
+                                            @if ($data->trainee->photo)
+                                                <td class="text-center"><img src="{{ asset($data->trainee->photo) }}" alt=""
                                                         width="150px" height="150px"></td>
                                             @else
                                                 <td class="text-center"><img src="{{ asset('assets/img/avatar.png') }}"
                                                         alt="" width="150px" height="150px"></td>
                                             @endif
-
-                                            @if ($data->nid_image)
-                                                <td class="text-center"><img src="{{ asset($data->nid_image) }}"
-                                                        alt="" width="150px" height="150px"></td>
-                                            @endif
-
                                         </tr>
                                         <tr>
-                                            <td>শিক্ষাগত সনদ</td>
-                                            <td>বেসিস কোর্স সনদ</td>
-                                        </tr>
-                                        <tr>
-
-                                            @if ($data->educational_certificate)
-                                                <td class="text-center"><img
-                                                        src="{{ asset($data->educational_certificate) }}" alt=""
+                                            @if ($data->trainee->signature)
+                                                <td class="text-center"><img src="{{ asset($data->trainee->signature) }}" alt=""
                                                         width="150px" height="150px"></td>
+                                            @else
+                                                <td class="text-center"><img src="{{ asset('assets/img/avatar.png') }}"
+                                                        alt="" width="300px" height="50px"></td>
                                             @endif
-
-                                            @if ($data->basis_institute_certificate)
-                                                <td class="text-center"><img
-                                                        src="{{ asset($data->basis_institute_certificate) }}"
-                                                        alt="" width="150px" height="150px"></td>
-                                            @endif
-
                                         </tr>
                                     </table>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        {{-- <div class="row">
                             <col-sm-12>
                                 <h5 class="bg-success p-2 text-white">Contact Information</h5>
                             </col-sm-12>
@@ -162,7 +142,7 @@
                                 </table>
                             </div>
 
-                        </div>
+                        </div> --}}
                         <div class="row">
                             <col-sm-12>
                                 <h5 class="bg-success p-2 text-white">Course Information</h5>
@@ -178,21 +158,7 @@
                                         <th>Application Date</th>
                                         <td>{{ $data->date }}</td>
                                     </tr>
-                                    <tr>
-                                        <th>শেখ হাসিনা জাতীয় যুব উন্নয়ন ইনস্টিটিউটে পূর্বে কোন কোর্স করেছেণ কিনা ?</th>
-                                        <td> {{ $data->any_course_before == 1 ? 'Yes' : 'No' }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>বর্তমানে কোথাও অধ্যয়নরত আছেন কিনা ?</th>
-                                        <td> {{ $data->current_education_status == 1 ? 'Yes' : 'No' }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Training Program on Small Business and Entrepreneurship Development কোর্সে
-                                            আবেদনকারীগণ বর্তমানে কোনো ব্যবসার সাথে যুক্ত না থাকলে পূর্বে কোন ব্যবসার
-                                            সাথে
-                                            যুক্ত ছিলেন কিনা ?</th>
-                                        <td> {{ $data->business_status == 1 ? 'Yes' : 'No' }}</td>
-                                    </tr>
+
                                     <tr>
                                         <th>সর্বশেষ শিক্ষাগত যোগ্যতা</th>
                                         <td> {{ $data->education->name ?? '' }}</td>
@@ -205,21 +171,6 @@
                                         <th>বেসিস কোর্স সনদ প্রদানকারী প্রতিষ্ঠানের ধরন</th>
                                         <td> {{ $data->instituteType->name ?? '' }}</td>
                                     </tr>
-                                    <tr>
-                                    <tr>
-                                        <th>বেসিস কোর্স সনদ</th>
-                                        @if ($data->basis_institute_certificate)
-                                            <th colspan="2" class="text-center">
-                                                <a class="btn btn-primary btn-sm" target="_blank"
-                                                    href="{{ asset($data->basis_institute_certificate) }}">View
-                                                    Certificate</a>
-
-                                            </th>
-                                        @endif
-
-                                    </tr>
-                                    </tr>
-
                                 </table>
                             </div>
 

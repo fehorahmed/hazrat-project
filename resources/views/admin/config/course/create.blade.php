@@ -83,6 +83,18 @@
 
 
                                     <div class="row mb-3">
+                                        <label for="example-select" class="col-12 col-md-3 col-form-label">Course Type</label>
+                                        <div class="col-12 col-md-9">
+                                            <input type="radio" name="course_type" id="course_type1"
+                                                {{ old('course_type') == '1' ? 'checked' : '' }} value="1"> <label for="course_type1">General Course</label>
+                                            <input type="radio" name="course_type" id="course_type2"
+                                                {{ old('course_type') == '2' ? 'checked' : '' }} value="2"> <label for="course_type2">Development Course</label>
+                                            @error('course_type')
+                                                <div class="help-block text-danger">{{ $message }} </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
                                         <label for="example-select" class="col-12 col-md-3 col-form-label">Status</label>
                                         <div class="col-12 col-md-9">
                                             <input type="radio" name="status" id="status1"
