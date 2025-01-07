@@ -112,10 +112,7 @@ Route::group(['prefix' => 'common'], function () {
     Route::get('/', [DepartmentController::class, 'getDepartmentByVersity'])->name('get.department.by.versity');
 });
 
-Route::group(['middleware' => ['auth:web'], 'prefix' => 'admin'], function () {
-    Route::get('/global', [GlobalConfigController::class, 'index'])->name('global.config');
-    Route::post('/global', [GlobalConfigController::class, 'store'])->name('global.config.update');
-});
+
 Route::group(['middleware' => ['auth:web'], 'prefix' => 'admin'], function () {
 
     Route::group(['prefix' => 'application'], function () {
@@ -140,7 +137,6 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => 'admin'], function () {
         Route::get('/{id}/application-list', [\App\Http\Controllers\Admin\ActiveCoursesController::class, 'applicationList'])->name('admin.courses.applicationList');
     });
     Route::group(['prefix' => 'configure'], function () {
-
         Route::group(['prefix' => 'application-date'], function () {
             Route::get('/', [ApplicationDateController::class, 'index'])->name('admin.config.application.date.index');
             Route::get('/create', [ApplicationDateController::class, 'create'])->name('admin.config.application.date.create');
@@ -149,7 +145,6 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => 'admin'], function () {
             Route::post('/edit/{id}', [ApplicationDateController::class, 'update'])->name('admin.config.application.date.update');
             Route::get('/export', [ApplicationDateController::class, 'export'])->name('admin.config.application.date.export');
         });
-
         Route::group(['prefix' => 'course'], function () {
             Route::get('/', [CourseController::class, 'index'])->name('admin.config.course.index');
             Route::get('/create', [CourseController::class, 'create'])->name('admin.config.course.create');
@@ -208,6 +203,9 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => 'admin'], function () {
             // Route::get('/export', [TraineeController::class, 'export'])->name('admin.config.trainee-age.export');
         });
     });
+
+    Route::get('/global', [GlobalConfigController::class, 'index'])->name('global.config');
+    Route::post('/global', [GlobalConfigController::class, 'store'])->name('global.config.update');
 
 
     Route::group(['prefix' => 'user'], function () {

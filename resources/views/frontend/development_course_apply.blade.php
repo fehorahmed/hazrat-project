@@ -4,6 +4,16 @@
     <!-- Start Why choose -->
     <section class="appointment">
         <div class="container">
+            @if (session('error'))
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <p class="alert alert-danger">{{ session('error') }}</p>
+
+                    </div>
+                </div>
+            @endif
+
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title mb-2">

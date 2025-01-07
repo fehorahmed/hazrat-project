@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="text-center mb-3">
                                         <a href="{{route('admin.config.versity.index')}}" class="btn btn-danger">Back</a>
-                                        <input type="submit" class="btn btn-primary  " value="Submit Application">
+                                        <input type="submit" class="btn btn-primary  " value="Create Versity">
                                     </div>
                                 </div>
                             </div>

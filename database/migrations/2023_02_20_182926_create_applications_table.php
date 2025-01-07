@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreignId('development_course_id')->nullable();
             $table->foreign('development_course_id')->on('development_courses')->references('id');
 
-            $table->foreignId('batch_id');
+            $table->foreignId('batch_id')->nullable();
 
             $table->foreignId('versity_id');
             $table->string('session');

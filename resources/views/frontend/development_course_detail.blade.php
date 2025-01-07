@@ -4,6 +4,15 @@
     <!-- Start Why choose -->
     <section class="why-choose section">
         <div class="container">
+            @if (session('success'))
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mb-2 text-success">
+                            <p class="alert alert-success">{{ session('success') }}</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title mb-2">
