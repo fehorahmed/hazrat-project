@@ -134,14 +134,14 @@
                 </a>
                 <div class="collapse" id="sidebarConfig">
                     <ul class="side-nav-second-level">
-                        <li>
+                        {{-- <li>
                             <a href="{{ route('admin.config.application.date.index') }}">Application Date Set</a>
-                        </li>
+                        </li> --}}
                         <li>
                             <a href="{{ route('admin.config.course.index') }}">Courses</a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.config.development-course.index') }}">Development Courses</a>
+                            <a href="{{ route('admin.config.batch.index') }}">Batch</a>
                         </li>
                         <li>
                             <a href="{{ route('admin.config.versity.index') }}">Versity</a>

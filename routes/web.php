@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\InstituteTypeController;
 use App\Http\Controllers\Admin\CourseDurationController;
 use App\Http\Controllers\Admin\ApplicationDateController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\BatchController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DevelopmentCourseController;
 use App\Http\Controllers\Frontend\TraineeNewPasswordController;
@@ -152,6 +153,14 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => 'admin'], function () {
             Route::get('/edit/{id}', [CourseController::class, 'edit'])->name('admin.config.course.edit');
             Route::post('/edit/{id}', [CourseController::class, 'update'])->name('admin.config.course.update');
             Route::get('/export', [CourseController::class, 'export'])->name('admin.config.course.export');
+        });
+         Route::group(['prefix' => 'batch'], function () {
+            Route::get('/', [BatchController::class, 'index'])->name('admin.config.batch.index');
+            Route::get('/create', [BatchController::class, 'create'])->name('admin.config.batch.create');
+            Route::post('/create', [BatchController::class, 'store'])->name('admin.config.batch.store');
+            Route::get('/edit/{id}', [BatchController::class, 'edit'])->name('admin.config.batch.edit');
+            Route::post('/edit/{id}', [BatchController::class, 'update'])->name('admin.config.batch.update');
+            Route::get('/export', [BatchController::class, 'export'])->name('admin.config.batch.export');
         });
         Route::group(['prefix' => 'development-course'], function () {
             Route::get('/', [DevelopmentCourseController::class, 'index'])->name('admin.config.development-course.index');
