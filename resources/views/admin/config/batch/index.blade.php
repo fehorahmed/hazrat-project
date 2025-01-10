@@ -65,7 +65,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.config.course.edit', $data->id) }}"
+                                            <a href="{{ route('admin.config.batch.edit', $data->id) }}"
                                                 class="btn btn-warning btn-sm">Edit</a>
                                         </td>
                                     </tr>

@@ -27,7 +27,7 @@ class BatchController extends Controller
     public function create()
     {
         $courses = Course::orderBy('id', 'DESC')->get();
-        return view('admin.config.batch.create',compact('courses'));
+        return view('admin.config.batch.create', compact('courses'));
     }
 
     /**
@@ -38,11 +38,23 @@ class BatchController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+
         $request->validate([
             'name' => 'required|string',
-            'course' => 'required|string|unique:courses,course_code',
+            'course' => 'required|numeric',
+            'status' => 'required|boolean',
         ]);
+
+        $data = new Batch();
+        $data->name = $request->name;
+        $data->course_id = $request->course;
+        $data->status = $request->status;
+        $data->created_by = auth()->id();
+        if ($data->save()) {
+            return redirect()->route('admin.config.batch.index')->with('success', 'Batch create successfully');
+        } else {
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
     }
 
     /**
@@ -62,9 +74,11 @@ class BatchController extends Controller
      * @param  \App\Models\Batch  $batch
      * @return \Illuminate\Http\Response
      */
-    public function edit(Batch $batch)
+    public function edit($id)
     {
-        //
+        $data = Batch::find($id);
+        $courses = Course::orderBy('id', 'DESC')->get();
+        return view('admin.config.batch.edit', compact('data', 'courses'));
     }
 
     /**
@@ -74,9 +88,24 @@ class BatchController extends Controller
      * @param  \App\Models\Batch  $batch
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Batch $batch)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'course' => 'required|numeric',
+            'status' => 'required|boolean',
+        ]);
+
+        $data =  Batch::find($id);
+        $data->name = $request->name;
+        $data->course_id = $request->course;
+        $data->status = $request->status;
+        // $data->created_by = auth()->id();
+        if ($data->save()) {
+            return redirect()->route('admin.config.batch.index')->with('success', 'Batch update successfully');
+        } else {
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
     }
 
     /**

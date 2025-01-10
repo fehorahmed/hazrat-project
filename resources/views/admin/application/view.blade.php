@@ -155,22 +155,18 @@
                                         <td>{{ $data->course->name ?? '' }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Application Date</th>
-                                        <td>{{ $data->date }}</td>
+                                        <th>Course Code</th>
+                                        <td>{{ $data->course->course_code }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Start Date</th>
+                                        <td>{{ $data->course->start_date }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>End Date</th>
+                                        <td>{{ $data->course->end_date }}</td>
                                     </tr>
 
-                                    <tr>
-                                        <th>সর্বশেষ শিক্ষাগত যোগ্যতা</th>
-                                        <td> {{ $data->education->name ?? '' }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>আপনার কম্পিউটার প্রশিক্ষনের কোর্সেও মেয়াদ কত মাসের ছিল ?</th>
-                                        <td> {{ $data->courseDuration->name ?? '' }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>বেসিস কোর্স সনদ প্রদানকারী প্রতিষ্ঠানের ধরন</th>
-                                        <td> {{ $data->instituteType->name ?? '' }}</td>
-                                    </tr>
                                 </table>
                             </div>
 

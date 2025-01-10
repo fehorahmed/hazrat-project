@@ -45,7 +45,7 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="course_code" class="col-12 col-md-3 col-form-label">Course Code</label>
+                                    <label for="course" class="col-12 col-md-3 col-form-label">Course</label>
                                     <div class="col-12 col-md-9">
 
                                         <select name="course" id="course" class="form-select">

@@ -122,6 +122,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Course Name</th>
+                                            <th>Batch</th>
                                             <th>Details</th>
                                             <th>Email/Phone</th>
                                             <th>Education</th>
@@ -138,8 +139,14 @@
                                                     {{ $loop->iteration }}
                                                 </td>
                                                 <td>
-                                                {{ $data->course->name ?? '' }} <br>
-                                                <strong> Batch :</strong> {{ $data->batch_id ?? '' }}
+                                                    {{ $data->course->name ?? '' }}
+                                                </td>
+                                                <td>
+                                                    @if (!$data->batch_id)
+                                                        <button class="btn btn-info btn-sm">Assign</button>
+                                                    @else
+                                                        <strong> Batch :</strong> {{ $data->batch_id ?? '' }}
+                                                    @endif
 
                                                 </td>
 
@@ -182,9 +189,6 @@
                                                     @if ($data->status == 1)
                                                         <a href="{{ route('admin.application.edit', $data->id) }}"
                                                             class="mt-1 btn btn-warning btn-sm">Edit</a>
-                                                        <button role="button" data-id="{{ $data->id }}"
-                                                            class="mt-1 btn btn-success btn-sm btn-approved">
-                                                            Approved </button>
                                                     @endif
 
                                                 </td>
@@ -203,7 +207,6 @@
 
         </div>
         <!-- end row -->
-
     </div>
 @endsection
 @push('scripts')
@@ -227,8 +230,6 @@
         });
 
         $(function() {
-
-
 
             $('.btn-approved').on('click', function(event) {
                 event.preventDefault();
@@ -299,8 +300,6 @@
                 })
             });
 
-
-
             $('.application_id').on('click', function() {
                 var isChecked = $('.application_id:checked').length > 0;
                 if (isChecked) {
@@ -309,8 +308,6 @@
                     $('#myButton').hide();
                 }
             });
-
-
 
             $('#myButton').on('click', function(event) {
                 event.preventDefault(); // Prevent default form submission
@@ -359,9 +356,6 @@
                     }
                 })
             });
-
-
-
         });
     </script>
 @endpush

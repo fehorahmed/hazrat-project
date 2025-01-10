@@ -26,62 +26,57 @@
                     </div>
                     <div class="card-body">
                         <form id="campaign-form" class="form-horizontal" method="post"
-                            action="{{ route('admin.config.course.update', $data->id) }}" enctype="multipart/form-data">
+                            action="{{ route('admin.config.batch.update', $data->id) }}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
+
+                                <div class="row mb-3">
+                                    <label for="name" class="col-12 col-md-3 col-form-label">Batch Name</label>
+                                    <div class="col-12 col-md-9">
+                                        <input type="text" name="name" id="name"
+                                            value="{{ old('name', $data->name) }}" class="form-control"
+                                            placeholder="Enter course name here">
+                                        @error('name')
+                                            <div class="help-block text-danger">{{ $message }} </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="course" class="col-12 col-md-3 col-form-label">Course</label>
+                                    <div class="col-12 col-md-9">
+
+                                        <select name="course" id="course" class="form-select">
+                                            <option value="">Select One</option>
+                                            @foreach ($courses as $course)
+                                                <option
+                                                    {{ old('course', $data->course_id) == $course->id ? 'selected' : '' }}
+                                                    value="{{ $course->id }}">{{ $course->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('course')
+                                            <div class="help-block text-danger">{{ $message }} </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="example-select" class="col-12 col-md-3 col-form-label">Status</label>
+                                    <div class="col-12 col-md-9">
+                                        <input type="radio" name="status" id="status1"
+                                            {{ old('status', $data->status) == '1' ? 'checked' : '' }} value="1"> <label
+                                            for="status1">Active</label>
+                                        <input type="radio" name="status" id="status2"
+                                            {{ old('status', $data->status) == '0' ? 'checked' : '' }} value="0"> <label
+                                            for="status2">Inactive</label>
+                                        @error('status')
+                                            <div class="help-block text-danger">{{ $message }} </div>
+                                        @enderror
+                                    </div>
+                                </div>
+
                                 <div class="col-md-12">
-                                    <div class="row mb-3">
-                                        <label for="name" class="col-12 col-md-3 col-form-label">Course Name</label>
-                                        <div class="col-12 col-md-9">
-                                            <input type="text" name="name" id="name"
-                                                value="{{ old('name', $data->name) }}" class="form-control"
-                                                placeholder="Enter course name here">
-                                            @error('name')
-                                                <div class="help-block text-danger">{{ $message }} </div>
-                                            @enderror
-                                        </div>
-
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label for="start_date" class="col-12 col-md-3 col-form-label">Start Date</label>
-                                        <div class="col-12 col-md-5">
-                                            <input type="date" name="start_date" id="start_date"
-                                                value="{{ old('start_date', $data->start_date) }}" class="form-control"
-                                                placeholder="Enter course start date here">
-                                            @error('start_date')
-                                                <div class="help-block text-danger">{{ $message }} </div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label for="end_date" class="col-12 col-md-3 col-form-label">End Date</label>
-                                        <div class="col-12 col-md-5">
-                                            <input type="date" name="end_date" id="end_date"
-                                                value="{{ old('end_date', $data->end_date) }}" class="form-control"
-                                                placeholder="Enter course end date here">
-                                            @error('end_date')
-                                                <div class="help-block text-danger">{{ $message }} </div>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <label for="example-select" class="col-12 col-md-3 col-form-label">Status</label>
-                                        <div class="col-12 col-md-9">
-                                            <input type="radio" name="status" id=""
-                                                {{ old('status', $data->status) == '1' ? 'checked' : '' }} value="1">
-                                            Active
-                                            <input type="radio" name="status" id=""
-                                                {{ old('status', $data->status) == '0' ? 'checked' : '' }} value="0">
-                                            Inactive
-                                            @error('status')
-                                                <div class="help-block text-danger">{{ $message }} </div>
-                                            @enderror
-                                        </div>
-                                    </div>
                                     <div class="text-center mb-3">
-                                        <a href="{{ route('admin.config.course.index') }}" class="btn btn-danger">Back</a>
-                                        <input type="submit" class="btn btn-primary  " value="Submit Application">
+                                        <a href="{{ route('admin.config.batch.index') }}" class="btn btn-danger">Back</a>
+                                        <input type="submit" class="btn btn-primary  " value="Update Batch">
                                     </div>
                                 </div>
                             </div>
