@@ -46,6 +46,18 @@
                                     </div>
 
                                     <div class="row mb-3">
+                                        <label for="course_code" class="col-12 col-md-3 col-form-label">Course Code</label>
+                                        <div class="col-12 col-md-9">
+                                            <input type="text" name="course_code" id="course_code"
+                                                value="{{ old('course_code') }}" class="form-control"
+                                                placeholder="Enter course code here">
+                                            @error('course_code')
+                                                <div class="help-block text-danger">{{ $message }} </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
                                         <label for="start_date" class="col-12 col-md-3 col-form-label">Start Date</label>
                                         <div class="col-12 col-md-5">
                                             <input type="date" name="start_date" id="start_date"
@@ -69,18 +81,30 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
+
                                     <div class="row mb-3">
-                                        <label for="course_code" class="col-12 col-md-3 col-form-label">Course Code</label>
+                                        <label for="course_fee" class="col-12 col-md-3 col-form-label">Course Fee</label>
                                         <div class="col-12 col-md-9">
-                                            <input type="text" name="course_code" id="course_code"
-                                                value="{{ old('course_code') }}" class="form-control"
-                                                placeholder="Enter course code here">
-                                            @error('course_code')
+                                            <input type="number" name="course_fee" id="course_fee"
+                                                value="{{ old('course_fee') }}" class="form-control"
+                                                placeholder="Enter course fee">
+                                            @error('course_fee')
                                                 <div class="help-block text-danger">{{ $message }} </div>
                                             @enderror
                                         </div>
                                     </div>
 
+                                    <div class="row mb-3">
+                                        <label for="first_installment" class="col-12 col-md-3 col-form-label">First Installment</label>
+                                        <div class="col-12 col-md-9">
+                                            <input type="number" name="first_installment" id="first_installment"
+                                                value="{{ old('first_installment') }}" class="form-control"
+                                                placeholder="Enter First Installment">
+                                            @error('first_installment')
+                                                <div class="help-block text-danger">{{ $message }} </div>
+                                            @enderror
+                                        </div>
+                                    </div>
 
                                     <div class="row mb-3">
                                         <label for="example-select" class="col-12 col-md-3 col-form-label">Course Type</label>

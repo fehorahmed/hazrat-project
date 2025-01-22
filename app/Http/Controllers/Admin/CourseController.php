@@ -47,6 +47,8 @@ class CourseController extends Controller
             'end_date' => 'required|date',
             'text' => 'nullable|string|max:50000',
             'course_type' => 'required|numeric',
+            'course_fee' => 'nullable|numeric',
+            'first_installment' => 'nullable|numeric',
             'status' => 'required|numeric',
         ]);
 
@@ -65,6 +67,8 @@ class CourseController extends Controller
         $data->course_code = $request->course_code;
         $data->text = $request->text;
         $data->course_type = $request->course_type;
+        $data->course_fee = $request->course_fee;
+        $data->first_installment = $request->first_installment;
         $data->status = $request->status;
         $data->start_date = $request->start_date;
         $data->end_date = $request->end_date;
@@ -108,18 +112,32 @@ class CourseController extends Controller
     {
         $request->validate([
             'name' => 'required|string|unique:courses,name,' . $id,
+            'course_code' => 'required|string|unique:courses,course_code,' . $id,
             'start_date' => 'required|date',
             'end_date' => 'required|date',
+            'text' => 'nullable|string|max:50000',
+            'course_type' => 'required|numeric',
+            'course_fee' => 'nullable|numeric',
+            'first_installment' => 'nullable|numeric',
             'status' => 'required|numeric',
+
         ]);
 
         $data = Course::find($id);
         $data->name = $request->name;
+        $data->slug = Str::slug($request->name, '-');
+        $data->course_code = $request->course_code;
+        $data->text = $request->text;
+        $data->course_type = $request->course_type;
+        $data->course_fee = $request->course_fee;
+        $data->first_installment = $request->first_installment;
+        $data->status = $request->status;
         $data->start_date = $request->start_date;
         $data->end_date = $request->end_date;
-        $data->status = $request->status;
-        $data->created_by = Auth::id();
+        // $data->created_by = Auth::id();
         $data->save();
+
+        return redirect()->route('admin.config.course.index')->with('success', 'Course created successfully');
 
         return redirect()->route('admin.config.course.index')->with('success', 'Course updated successfully');
     }
@@ -137,14 +155,14 @@ class CourseController extends Controller
 
     public function courseDetail($slug)
     {
-        $data = Course::where('slug',$slug)->first();
+        $data = Course::where('slug', $slug)->first();
 
-        if(!$data){
+        if (!$data) {
             return response()->json([
-                'message'=>'Not found.'
+                'message' => 'Not found.'
             ]);
         }
 
-        return view('frontend.course_detail',compact('data'));
+        return view('frontend.course_detail', compact('data'));
     }
 }

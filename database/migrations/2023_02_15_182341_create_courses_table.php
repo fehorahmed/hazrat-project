@@ -20,6 +20,8 @@ return new class extends Migration
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->string('course_code')->unique();
+            $table->unsignedInteger('course_fee')->nullable();
+            $table->unsignedInteger('first_installment')->nullable();
             $table->string('slug')->unique();
             $table->longText('text')->nullable();
             $table->boolean('status')->default(1);
