@@ -16,14 +16,19 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title mb-2">
-                        <h2>{{ $data->name }}</h2>
+                        <div>
+                            <h2>{{ $data->name }}</h2>
+                            <p>Course Fee : {{number_format($data->course_fee,2)}} TK</p>
+                            <p>First Installment : {{number_format($data->first_installment,2)}} TK</p>
+                        </div>
+
                         <img src="{{ asset('front-assets') }}/img/section-img.png" alt="#">
                         {{-- <p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p> --}}
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12 col-12 my-2">
+                <div class="col-lg-12 col-12 my-2" style="display:grid;">
                     {!! $data->text !!}
                 </div>
                 <div class="col-lg-12 col-12 text-center mt-4">

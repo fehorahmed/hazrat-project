@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title -->
-    <title>Mediplus - Free Medical and Doctor Directory HTML Template.</title>
+    <title>{{ getGlobalConfig('application_name') ?? env('APP_NAME') }} @yield('title')</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('front-assets') }}/img/favicon.png">

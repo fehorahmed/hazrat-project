@@ -2718,7 +2718,7 @@ body{
 ============================*/
 .appointment{
 	background:#fff;
-	padding-top:100px;
+	padding:70px 0px;
 }
 .appointment.single-page {
 	background: #fff;

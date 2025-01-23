@@ -23,8 +23,54 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-6 col-md-12 col-12">
-                    <h2>This is Your dashboard</h2>
+                <div class=" col-md-12 col-12">
+                    <h2>Dashboard</h2>
+                </div>
+                <div class="col-md-12">
+                    <table class="table table-stripped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Course Name</th>
+                                <th>Batch</th>
+                                <th>Email/Phone</th>
+                                <th>Education</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($applications as $application)
+                                <tr>
+                                    <td>
+                                        {{ $loop->iteration }}
+                                    </td>
+                                    <td>
+                                        {{ $application->course->name ?? '' }}
+                                    </td>
+                                    <td>
+                                        @if (!$application->batch_id)
+
+                                        @else
+                                            <strong> Batch :</strong> {{ $application->batch_id ?? '' }}
+                                        @endif
+
+                                    </td>
+                                    <td>
+                                        <strong>Email :</strong> {{ $application->trainee->email ?? '' }} <br>
+                                        <strong>Phone :</strong> {{ $application->trainee->phone ?? '' }}
+                                    </td>
+                                    <td>
+                                        <strong> Versity :</strong> {{ $application->versity->name ?? '' }} <br>
+                                        <strong> Department :</strong> {{ $application->department->name ?? '' }} <br>
+                                        <strong> Semester :</strong> {{ getSemester($application->semester) }} <br>
+                                        <strong> Session :</strong> {{ $application->session ?? '' }}
+                                    </td>
+                                    <td>{{getApplicationStatus($application->status)}}</td>
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
 

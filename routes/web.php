@@ -17,6 +17,7 @@ use App\Http\Controllers\DevelopmentCourseController;
 use App\Http\Controllers\Frontend\TraineeNewPasswordController;
 use App\Http\Controllers\Frontend\TraineePasswordResetLinkController;
 use App\Http\Controllers\GlobalConfigController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VersityController;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Fortify\Http\Controllers\NewPasswordController;
@@ -39,6 +40,11 @@ Route::get('/', function () {
     // return view('frontend_2.app');
     return view('frontend.landing');
 })->name('home');
+
+
+Route::get('/contact', [HomeController::class, 'contactPage'])->name('home.contact');
+
+
 
 Route::middleware([
     'auth:sanctum',

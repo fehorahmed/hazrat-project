@@ -17,9 +17,9 @@
                  <div class="col-lg-6 col-md-7 col-12">
                      <!-- Top Contact -->
                      <ul class="top-contact">
-                         <li><i class="fa fa-phone"></i>{{getGlobalConfig('phone')}}</li>
+                         <li><i class="fa fa-phone"></i>{{ getGlobalConfig('phone') }}</li>
                          <li><i class="fa fa-envelope"></i><a
-                                 href="mailto:support@yourmail.com">{{getGlobalConfig('application_email')}}</a></li>
+                                 href="mailto:support@yourmail.com">{{ getGlobalConfig('application_email') }}</a></li>
                      </ul>
                      <!-- End Top Contact -->
                  </div>
@@ -37,7 +37,8 @@
                          <div class="logo">
                              <a href="{{ route('home') }}">
                                  @if (getGlobalConfig('application_logo'))
-                                     <img src="{{ asset(getGlobalConfig('application_logo')) }}" style="height: 33px; width:160px;" alt="#">
+                                     <img src="{{ asset(getGlobalConfig('application_logo')) }}"
+                                         style="height: 33px; width:160px;" alt="#">
                              </a>
                          @else
                              <img src="{{ asset('front-assets') }}/img/logo.png" alt="#"></a>
@@ -54,7 +55,7 @@
                          <div class="main-menu">
                              <nav class="navigation">
                                  <ul class="nav menu">
-                                     <li class="active"><a href="#">Home </a></li>
+                                     <li class="active"><a href="{{ route('home') }}">Home </a></li>
                                      {{-- <li class="active"><a href="#">Home <i class="icofont-rounded-down"></i></a>
                                          <ul class="dropdown">
                                              <li><a href="index.html">Home Page 1</a></li>
@@ -87,7 +88,7 @@
                                              <li><a href="blog-single.html">Blog Details</a></li>
                                          </ul>
                                      </li>
-                                     <li><a href="contact.html">Contact Us</a></li>
+                                     <li><a href="{{ route('home.contact') }}">Contact Us</a></li>
                                  </ul>
                              </nav>
                          </div>

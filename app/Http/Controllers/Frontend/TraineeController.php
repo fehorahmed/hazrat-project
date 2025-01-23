@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Application;
 use App\Models\Trainee;
 use App\Models\TraineeAge;
 use App\Models\User;
@@ -126,6 +127,9 @@ class TraineeController extends Controller
     public function dashboard()
     {
 
-        return view('frontend.trainee.dashboard');
+        $applications= Application::where('trainee_id',auth()->guard('trainee')->id())->get();
+        // dd(auth()->guard('trainee')->id());
+
+        return view('frontend.trainee.dashboard',compact('applications'));
     }
 }

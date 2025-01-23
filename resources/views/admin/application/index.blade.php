@@ -144,9 +144,7 @@
                                                     @else
                                                         <strong> Batch :</strong> {{ $data->batch_id ?? '' }}
                                                     @endif
-
                                                 </td>
-
                                                 <td>
                                                     <strong>Name :</strong> {{ $data->trainee->name ?? '' }} <br>
                                                     <strong>Father Name :</strong> {{ $data->trainee->father_name ?? '' }}
@@ -161,33 +159,19 @@
                                                     <strong> Semester :</strong> {{ getSemester($data->semester) }} <br>
                                                     <strong> Session :</strong> {{ $data->session ?? '' }}
                                                 </td>
-
                                                 <td>{{ $data->trainee->nid ?? '' }}</td>
-                                                {{-- <td>
-                                                    <strong> Division:</strong> {{ $data->trainee->division->name ?? '' }},<br>
-                                                    <strong> District:</strong> {{ $data->trainee->district->name ?? '' }},<br>
-                                                    <strong>Upazila: </strong>{{ $data->trainee->upazila->name ?? '' }},
-                                                    <strong>Address: </strong>{{ $data->trainee->address ?? '' }}
-                                                </td> --}}
                                                 <td>
-                                                    @if ($data->status == 0)
-                                                        <span class="badge bg-danger ">Inactive</span>
-                                                    @elseif($data->status == 1)
-                                                        <span class="badge bg-info ">Active</span>
-                                                    @elseif($data->status == 2)
-                                                        <span class="badge bg-success ">Approved</span>
-                                                    @else
-                                                    @endif
+
+                                                        <span class="badge {{getApplicationStatusBg($data->status)}} ">{{getApplicationStatus($data->status)}}</span>
+
                                                 </td>
                                                 <td>
                                                     <a href="{{ route('admin.application.view', $data->id) }}"
                                                         class="mt-1 btn btn-primary btn-sm">VIEW</a>
-
                                                     @if ($data->status == 1)
                                                         <a href="{{ route('admin.application.edit', $data->id) }}"
                                                             class="mt-1 btn btn-warning btn-sm">Edit</a>
                                                     @endif
-
                                                 </td>
 
                                             </tr>

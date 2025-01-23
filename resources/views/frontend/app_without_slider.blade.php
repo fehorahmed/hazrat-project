@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title -->
-    <title>Mediplus - Free Medical and Doctor Directory HTML Template.</title>
+    <title>{{ getGlobalConfig('application_name') ?? env('APP_NAME') }} @yield('title')</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('front-assets') }}/img/favicon.png">
@@ -49,7 +49,7 @@
 
 <body>
 
-     <!-- Preloader -->
+    <!-- Preloader -->
     <div class="preloader">
         <div class="loader">
             <div class="loader-outter"></div>
@@ -64,7 +64,7 @@
         </div>
     </div>
     <!-- End Preloader -->
-{{--
+    {{--
     <!-- Get Pro Button -->
     <ul class="pro-features">
         <a class="get-pro" href="#">Get Pro</a>

@@ -57,13 +57,13 @@ function getFile($file)
 }
 function getMenuCourses()
 {
-    $data = Course::select('name', 'slug')->where('course_type',1)->where('status', 1)->orderBy('serial')->get();
+    $data = Course::select('name', 'slug')->where('course_type', 1)->where('status', 1)->orderBy('serial')->get();
     // dd($data);
     return  $data;
 }
 function getMenuSkillDevelopments()
 {
-    $data = Course::select('name', 'slug')->where('course_type',2)->where('status', 1)->orderBy('serial')->get();
+    $data = Course::select('name', 'slug')->where('course_type', 2)->where('status', 1)->orderBy('serial')->get();
     // dd($data);
     return  $data;
 }
@@ -100,7 +100,7 @@ function getSemester($number)
             3 => 'rd',
             default => 'th',
         };
-        if($i == $number){
+        if ($i == $number) {
             $data = "{$i}{$suffix} Semester";
         }
     }
@@ -110,4 +110,35 @@ function getGlobalConfig($key)
 {
     $data = GlobalConfig::where('key', $key)->first();
     return $data ? $data->value : null;
+}
+
+function allApplicationStatus()
+{
+    $arr = [
+        0 => ['Cancel', 'bg-danger'],
+        1 => ['Applied', 'bg-info'],
+        2 => ['Approved', 'bg-success'],
+    ];
+    return $arr;
+}
+function getApplicationStatus($number)
+{
+    $data = '';
+
+    $arr = allApplicationStatus();
+    if (isset($arr[$number])) {
+        $data = $arr[$number][0];
+    }
+    return $data;
+}
+function getApplicationStatusBg($number)
+{
+    $data = '';
+
+    $arr = allApplicationStatus();
+
+    if (isset($arr[$number])) {
+        $data = $arr[$number][1];
+    }
+    return $data;
 }
