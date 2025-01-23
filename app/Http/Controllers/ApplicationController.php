@@ -98,5 +98,20 @@ class ApplicationController extends Controller
 
         return view('admin.application.view', compact('data'));
     }
+    public function batchUpdate(Request $request)
+    {
+        $request->validate([
+            'application_id'=>'required|numeric',
+            'batch_id'=>'required|numeric',
+        ]);
+        // dd($request->all());
+        $data = Application::find($request->application_id);
+        $data->batch_id= $request->batch_id;
+        if($data->update()){
+            return redirect()->back()->with('success','Batch update successfully.');
+        }else{
+            return redirect()->back()->with('error','Something went wrong.');
+        }
+    }
 
 }

@@ -131,6 +131,10 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => 'admin'], function () {
         Route::get('/edit/{id}', [\App\Http\Controllers\Admin\ApplicationController::class, 'edit'])->name('admin.application.edit');
         Route::post('/edit/{id}', [\App\Http\Controllers\Admin\ApplicationController::class, 'update'])->name('admin.application.update');
         Route::get('/{id}/view', [ApplicationController::class, 'show'])->name('admin.application.view');
+
+        Route::post('/batch/update', [ApplicationController::class, 'batchUpdate'])->name('admin.application.batch.update');
+
+
         // Route::get('/export', [\App\Http\Controllers\Admin\ApplicationController::class, 'export'])->name('admin.application.export');
         // Route::get('/approve', [\App\Http\Controllers\Admin\ApplicationController::class, 'approve'])->name('admin.application.approve');
         // Route::post('/change-status', [\App\Http\Controllers\Admin\ApplicationController::class, 'changeStatus'])->name('admin.application.multiple.status.change');
@@ -191,31 +195,6 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => 'admin'], function () {
             Route::get('/edit/{id}', [DepartmentController::class, 'edit'])->name('admin.config.department.edit');
             Route::post('/edit/{id}', [DepartmentController::class, 'update'])->name('admin.config.department.update');
             Route::get('/export', [DepartmentController::class, 'export'])->name('admin.config.department.export');
-        });
-
-        Route::group(['prefix' => 'institute-type'], function () {
-            Route::get('/', [InstituteTypeController::class, 'index'])->name('admin.config.institute.type.index');
-            Route::get('/create', [InstituteTypeController::class, 'create'])->name('admin.config.institute.type.create');
-            Route::post('/create', [InstituteTypeController::class, 'store'])->name('admin.config.institute.type.store');
-            Route::get('/edit/{id}', [InstituteTypeController::class, 'edit'])->name('admin.config.institute.type.edit');
-            Route::post('/edit/{id}', [InstituteTypeController::class, 'update'])->name('admin.config.institute.type.update');
-            Route::get('/export', [InstituteTypeController::class, 'export'])->name('admin.config.institute.type.export');
-        });
-        Route::group(['prefix' => 'course-duration'], function () {
-            Route::get('/', [CourseDurationController::class, 'index'])->name('admin.config.course.duration.index');
-            Route::get('/create', [CourseDurationController::class, 'create'])->name('admin.config.course.duration.create');
-            Route::post('/create', [CourseDurationController::class, 'store'])->name('admin.config.course.duration.store');
-            Route::get('/edit/{id}', [CourseDurationController::class, 'edit'])->name('admin.config.course.duration.edit');
-            Route::post('/edit/{id}', [CourseDurationController::class, 'update'])->name('admin.config.course.duration.update');
-            Route::get('/export', [CourseDurationController::class, 'export'])->name('admin.config.course.duration.export');
-        });
-        Route::group(['prefix' => 'trainee-age'], function () {
-            Route::get('/', [TraineeController::class, 'ageIndex'])->name('admin.config.trainee-age.index');
-            // Route::get('/create', [TraineeController::class, 'create'])->name('admin.config.trainee-age.create');
-            Route::post('/store', [TraineeController::class, 'ageStore'])->name('admin.config.trainee-age.store');
-            // Route::get('/edit/{id}', [TraineeController::class, 'edit'])->name('admin.config.trainee-age.edit');
-            // Route::post('/edit/{id}', [TraineeController::class, 'update'])->name('admin.config.trainee-age.update');
-            // Route::get('/export', [TraineeController::class, 'export'])->name('admin.config.trainee-age.export');
         });
     });
 

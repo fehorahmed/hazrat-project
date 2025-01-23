@@ -13,4 +13,8 @@ class Course extends Model
     {
         return $this->hasMany(Application::class, 'course_id', 'id');
     }
+    public function batches()
+    {
+        return $this->hasMany(Batch::class, 'course_id', 'id');
+    }
 }

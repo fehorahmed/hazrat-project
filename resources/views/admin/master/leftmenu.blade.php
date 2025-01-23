@@ -149,16 +149,6 @@
                         <li>
                             <a href="{{ route('admin.config.department.index') }}">Department</a>
                         </li>
-                        <li>
-                            <a href="{{ route('admin.config.institute.type.index') }}">Institute Type</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.config.course.duration.index') }}">Course Duration</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.config.trainee-age.index') }}">Trainee Age</a>
-                        </li>
-
                     </ul>
                 </div>
             </li>

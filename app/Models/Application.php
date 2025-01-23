@@ -17,6 +17,10 @@ class Application extends Model
     {
         return $this->belongsTo(Trainee::class, 'trainee_id', 'id');
     }
+    public function batch()
+    {
+        return $this->belongsTo(Batch::class, 'batch_id', 'id');
+    }
 
     public function versity()
     {

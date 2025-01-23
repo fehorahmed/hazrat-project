@@ -102,28 +102,6 @@ class TraineeController extends Controller
         return redirect()->route('trainee.login')->with('success', 'Registration Success. Please Login Here.');
     }
 
-    public function ageIndex()
-    {
-        $data = TraineeAge::first();
-        return view('admin.config.trainee_age.index', compact('data'));
-    }
-    public function ageStore(Request $request)
-    {
-
-        $request->validate([
-            'max_age' => 'required|numeric',
-            'min_age' => 'required|numeric',
-        ]);
-
-        $data = TraineeAge::first();
-        if (!$data) {
-            $data = new TraineeAge();
-        }
-        $data->max_age = $request->max_age;
-        $data->min_age = $request->min_age;
-        $data->save();
-        return redirect()->back()->with('success', 'Age Update Successfully.');
-    }
     public function dashboard()
     {
 

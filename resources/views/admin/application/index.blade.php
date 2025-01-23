@@ -66,7 +66,6 @@
                     <div class="card-body">
                         <form action="">
                             <div class="row">
-
                                 <div class="col-md-2">
                                     <div class="mb-3">
                                         <label for="example-select" class="form-label">Course Name</label>
@@ -89,103 +88,142 @@
                                         </button> --}}
                                     </div>
                                 </div>
-
-                                {{-- <div class="col-md-2">
-                                    <div class="mb-3">
-                                        <label class="form-label">Date From</label>
-                                        <input type="date" name="start_date" value="{{ request('start_date') }}"
-                                            class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="mb-3">
-                                        <label class="form-label">Date To</label>
-                                        <input type="date" name="end_date" value="{{ request('end_date') }}"
-                                            class="form-control">
-                                    </div>
-                                </div> --}}
-
-                            </div>
-                            <div class="row">
-
-
                             </div>
                         </form>
                         <div class="table-responsive">
-                            <form id="myForm">
-                                <table id="datatable-buttons"
-                                    class="table table-striped table-bordered dt-responsive nowrap w-100">
-                                    <thead>
+                            <table id="datatable-buttons"
+                                class="table table-striped table-bordered dt-responsive nowrap w-100">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Course Name</th>
+
+                                        <th>Details</th>
+                                        <th>Email/Phone</th>
+                                        <th>Education</th>
+                                        <th>NID/BR</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($datas as $data)
                                         <tr>
-                                            <th>#</th>
-                                            <th>Course Name</th>
-                                            <th>Batch</th>
-                                            <th>Details</th>
-                                            <th>Email/Phone</th>
-                                            <th>Education</th>
-                                            <th>NID/BR</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+                                            <td>
+                                                {{ $loop->iteration }}
+                                            </td>
+                                            <td>
+                                                {{ $data->course->name ?? '' }}
+                                                @if ($data->batch_id)
+                                                    <br>
+                                                    <strong> Batch :</strong> {{ $data->batch->name ?? '' }}
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <strong>Name :</strong> {{ $data->trainee->name ?? '' }} <br>
+                                                <strong>Father Name :</strong> {{ $data->trainee->father_name ?? '' }}
+                                            </td>
+                                            <td>
+                                                <strong>Email :</strong> {{ $data->trainee->email ?? '' }} <br>
+                                                <strong>Phone :</strong> {{ $data->trainee->phone ?? '' }}
+                                            </td>
+                                            <td>
+                                                <strong> Versity :</strong> {{ $data->versity->name ?? '' }} <br>
+                                                <strong> Department :</strong> {{ $data->department->name ?? '' }} <br>
+                                                <strong> Semester :</strong> {{ getSemester($data->semester) }} <br>
+                                                <strong> Session :</strong> {{ $data->session ?? '' }}
+                                            </td>
+                                            <td>{{ $data->trainee->nid ?? '' }}</td>
+                                            <td>
+                                                <span
+                                                    class="badge {{ getApplicationStatusBg($data->status) }} ">{{ getApplicationStatus($data->status) }}</span>
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('admin.application.view', $data->id) }}"
+                                                    class="mt-1 btn btn-primary btn-sm">VIEW</a>
+                                                @if ($data->status == 1)
+                                                    <a href="{{ route('admin.application.edit', $data->id) }}"
+                                                        class="mt-1 btn btn-warning btn-sm">Edit</a>
+                                                @endif
+                                                @if (!$data->batch_id)
+                                                    <br>
+                                                    <button type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModal{{ $data->id }}"
+                                                        class="btn btn-info btn-sm mt-1">Assign Batch</button>
+                                                @endif
+                                            </td>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModal{{ $data->id }}" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Assign
+                                                                Batch</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                        </div>
+                                                        <form action="{{ route('admin.application.batch.update') }}"
+                                                            method="post" enctype="multipart/form-data">
+                                                            @csrf
+                                                            <div class="modal-body">
+                                                                <input type="hidden" name="application_id"
+                                                                    value="{{ $data->id }}">
+                                                                <div class="row mb-3">
+                                                                    <label for="name"
+                                                                        class="col-12 col-md-3 col-form-label">Trainee
+                                                                        Name</label>
+                                                                    <div class="col-12 col-md-9">
+                                                                        <input type="text" name="name" id="name"
+                                                                            value="{{ $data->trainee->name ?? '' }}"
+                                                                            class="form-control" placeholder="" readonly>
+                                                                        @error('name')
+                                                                            <div class="help-block text-danger">
+                                                                                {{ $message }} </div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mb-3">
+                                                                    <label for="batch_id"
+                                                                        class="col-12 col-md-3 col-form-label">Select
+                                                                        Batch</label>
+                                                                    <div class="col-12 col-md-9">
+                                                                        <select name="batch_id" id="batch_id"
+                                                                            class="form-select">
+                                                                            <option value="">Select One</option>
+                                                                            @foreach ($data->course->batches as $batch)
+                                                                                <option value="{{ $batch->id }}">
+                                                                                    {{ $batch->name }}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                        @error('batch_id')
+                                                                            <div class="help-block text-danger">
+                                                                                {{ $message }} </div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Update
+                                                                    Batch</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </tr>
-                                    </thead>
-                                    <tbody>
+                                    @endforeach
 
-                                        @foreach ($datas as $data)
-                                            <tr>
-                                                <td>
-                                                    {{ $loop->iteration }}
-                                                </td>
-                                                <td>
-                                                    {{ $data->course->name ?? '' }}
-                                                </td>
-                                                <td>
-                                                    @if (!$data->batch_id)
-                                                        <button class="btn btn-info btn-sm">Assign</button>
-                                                    @else
-                                                        <strong> Batch :</strong> {{ $data->batch_id ?? '' }}
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    <strong>Name :</strong> {{ $data->trainee->name ?? '' }} <br>
-                                                    <strong>Father Name :</strong> {{ $data->trainee->father_name ?? '' }}
-                                                </td>
-                                                <td>
-                                                    <strong>Email :</strong> {{ $data->trainee->email ?? '' }} <br>
-                                                    <strong>Phone :</strong> {{ $data->trainee->phone ?? '' }}
-                                                </td>
-                                                <td>
-                                                    <strong> Versity :</strong> {{ $data->versity->name ?? '' }} <br>
-                                                    <strong> Department :</strong> {{ $data->department->name ?? '' }} <br>
-                                                    <strong> Semester :</strong> {{ getSemester($data->semester) }} <br>
-                                                    <strong> Session :</strong> {{ $data->session ?? '' }}
-                                                </td>
-                                                <td>{{ $data->trainee->nid ?? '' }}</td>
-                                                <td>
-
-                                                        <span class="badge {{getApplicationStatusBg($data->status)}} ">{{getApplicationStatus($data->status)}}</span>
-
-                                                </td>
-                                                <td>
-                                                    <a href="{{ route('admin.application.view', $data->id) }}"
-                                                        class="mt-1 btn btn-primary btn-sm">VIEW</a>
-                                                    @if ($data->status == 1)
-                                                        <a href="{{ route('admin.application.edit', $data->id) }}"
-                                                            class="mt-1 btn btn-warning btn-sm">Edit</a>
-                                                    @endif
-                                                </td>
-
-                                            </tr>
-                                        @endforeach
-
-                                    </tbody>
-                                </table>
-                            </form>
+                                </tbody>
+                            </table>
                         </div>
                         {{ @$datas->links('pagination::bootstrap-5') }}
                     </div> <!-- end card-body-->
                 </div> <!-- end card-->
             </div> <!-- end col-->
-
         </div>
         <!-- end row -->
     </div>
@@ -233,110 +271,7 @@
                     });
                 }
             });
-            $('.btn-enroll').on('click', function(event) {
-                event.preventDefault();
-                var app_id = $(this).attr('data-id');
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, Enroll it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            url: '', // Replace with your endpoint URL
-                            type: 'POST', // Replace with your desired HTTP method (e.g., POST, GET)
-                            data: {
-                                app_id: app_id
-                            }, // Send serialized form data
-                            success: function(response) {
-                                if (response.success) {
-                                    Swal.fire({
-                                        title: 'Message',
-                                        text: response.message,
-                                        icon: 'success',
-                                        confirmButtonText: 'OK'
-                                    }).then(function() {
-                                        location.reload(); // Reload the page
-                                    });
-                                } else {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Oops...',
-                                        text: response.message,
 
-                                    })
-                                }
-
-                            },
-                            error: function(xhr, status, error) {
-                                // Handle error response from the server
-                                console.error(error);
-                            }
-                        });
-                    }
-                })
-            });
-
-            $('.application_id').on('click', function() {
-                var isChecked = $('.application_id:checked').length > 0;
-                if (isChecked) {
-                    $('#myButton').show();
-                } else {
-                    $('#myButton').hide();
-                }
-            });
-
-            $('#myButton').on('click', function(event) {
-                event.preventDefault(); // Prevent default form submission
-
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, do it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        var formData = $('#myForm').serialize(); // Serialize form data
-                        console.log(formData);
-                        $.ajax({
-                            url: '', // Replace with your endpoint URL
-                            type: 'POST', // Replace with your desired HTTP method (e.g., POST, GET)
-                            data: formData, // Send serialized form data
-                            success: function(response) {
-                                if (response.success) {
-                                    Swal.fire({
-                                        title: 'Message',
-                                        text: response.message,
-                                        icon: 'success',
-                                        confirmButtonText: 'OK'
-                                    }).then(function() {
-                                        location.reload(); // Reload the page
-                                    });
-                                } else {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Oops...',
-                                        text: 'Something went wrong!',
-
-                                    })
-                                }
-
-                            },
-                            error: function(xhr, status, error) {
-                                // Handle error response from the server
-                                console.error(error);
-                            }
-                        });
-                    }
-                })
-            });
         });
     </script>
 @endpush

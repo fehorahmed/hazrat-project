@@ -21,7 +21,6 @@
                     @endif
                 </div>
             </div>
-
             <div class="row">
                 <div class=" col-md-12 col-12">
                     <h2>Dashboard</h2>
@@ -36,6 +35,7 @@
                                 <th>Email/Phone</th>
                                 <th>Education</th>
                                 <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,9 +49,8 @@
                                     </td>
                                     <td>
                                         @if (!$application->batch_id)
-
                                         @else
-                                            <strong> Batch :</strong> {{ $application->batch_id ?? '' }}
+                                            {{ $application->batch->name ?? '' }}
                                         @endif
 
                                     </td>
@@ -65,15 +64,14 @@
                                         <strong> Semester :</strong> {{ getSemester($application->semester) }} <br>
                                         <strong> Session :</strong> {{ $application->session ?? '' }}
                                     </td>
-                                    <td>{{getApplicationStatus($application->status)}}</td>
+                                    <td>{{ getApplicationStatus($application->status) }}</td>
+                                    <td> <a href="" class="btn-info btn-sm text-light">Pay Details</a> </td>
                                 </tr>
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>
             </div>
-
         </div>
     </section>
     <!-- End Appointment -->
